@@ -47,4 +47,7 @@
 	    /* close statement */
 	    $stmt->close();
 	}
+	$mysqli->close();
+	
+	
 ?>
