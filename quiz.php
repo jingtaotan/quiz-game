@@ -21,21 +21,18 @@
 
 	<div class="container">
 
-		<div class="row">
-			<div class="col-xs-12">
-				<h1>Quiz</h1>
-				<div class="timer pull-right">
-					<p>Time left: 01:00</p>
-				</div>
+		<div class="header">
+			<div class="timer">
+				<span id="timer-display">01:00</span>
+				<a href="#" id="quit-btn" class="btn btn-danger">Quit Game</a>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="question">
-				Question will ask you which option is the right one?
-			</div>
+		<div class="question">
+			Question will ask you which option is the right one?
 		</div>
-		<div class="row">
+
+		<div class="answers">
 			<a class="answer">
 				Option 1
 			</a>
@@ -49,6 +46,7 @@
 				Option 4
 			</a>
 		</div>
+
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

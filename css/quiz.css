@@ -11,8 +11,23 @@ html {
   max-width: 970px;
 }
 
-.timer {
+.header {
+  margin-bottom: 1em;
+}
 
+.timer {
+  font-size: 150%;
+  position: relative;
+}
+
+#timer-display {
+  font-size: 200%;
+}
+
+#quit-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 0;
 }
 
 .question, .answer {
@@ -22,16 +37,25 @@ html {
 .question {
   padding: 1em;
   min-height: 4.92em;
+  margin-bottom: 1em;
+  border-radius: 5px;
 }
 .answer {
   font-size: 150%;
   padding: 1.2em;
   cursor: pointer;
   display: block;
+  margin-bottom: -1px;
 }
 .answer:hover {
   text-decoration: none;
   background-color: #ccc;
+}
+.answer:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.answer:last-child {
+  border-radius: 0 0 5px 5px;
 }
 
 @media (max-width: 767px) {
