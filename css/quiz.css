@@ -1,0 +1,46 @@
+html {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container {
+  max-width: 970px;
+}
+
+.timer {
+
+}
+
+.question, .answer {
+  border: 1px solid #ccc;
+  font-size: 200%;
+}
+.question {
+  padding: 1em;
+  min-height: 4.92em;
+}
+.answer {
+  font-size: 150%;
+  padding: 1.2em;
+  cursor: pointer;
+  display: block;
+}
+.answer:hover {
+  text-decoration: none;
+  background-color: #ccc;
+}
+
+@media (max-width: 767px) {
+  .question {
+    min-height: 3.93em;
+    padding: 0.5em;
+    font-size: 150%;
+  }
+  .answer {
+    padding: 0.5em;
+  }
+}
