@@ -7,64 +7,44 @@ html {
   user-select: none;
 }
 
+/* Don't want the xl breakpoint size */
 .container {
   max-width: 970px;
 }
 
 .header {
   margin-bottom: 1em;
+  padding-top: 15px;
 }
 
 .timer {
   font-size: 150%;
-  position: relative;
-}
-
-#timer-display {
-  font-size: 200%;
-}
-
-#quit-btn {
-  position: absolute;
-  bottom: 15px;
-  right: 0;
 }
 
 .question, .answer {
-  border: 1px solid #ccc;
-  font-size: 200%;
-}
-.question {
-  padding: 1em;
-  min-height: 4.92em;
-  margin-bottom: 1em;
-  border-radius: 5px;
-}
-.answer {
-  font-size: 150%;
-  padding: 1.2em;
-  cursor: pointer;
-  display: block;
-  margin-bottom: -1px;
-}
-.answer:hover {
-  text-decoration: none;
-  background-color: #ccc;
-}
-.answer:first-child {
-  border-radius: 5px 5px 0 0;
-}
-.answer:last-child {
-  border-radius: 0 0 5px 5px;
+  font-size: 120%;
 }
 
-@media (max-width: 767px) {
+.question {
+  min-height: 78px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  body {
+    font-size: 200%;
+  }
+  .panel-body {
+    padding: 20px;
+  }
+  .list-group-item {
+    padding: 15px 20px;
+  }
   .question {
-    min-height: 3.93em;
-    padding: 0.5em;
-    font-size: 150%;
+    min-height: 108px;
   }
-  .answer {
-    padding: 0.5em;
-  }
+}
+
+#finished-screen {
+  display: none;
 }
