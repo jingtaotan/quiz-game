@@ -60,6 +60,23 @@ $mysqli->close();
 	<![endif]-->
 </head>
 <body>
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId      : '1575617865987702',
+			xfbml      : true,
+			version    : 'v2.2'
+		});
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
 
 	<div class="container">
 
@@ -207,7 +224,7 @@ $mysqli->close();
 				}
 			});
 			answerEls.on('click', function(event) {
-				event.preventDefault
+				event.preventDefault();
 				var answerEl = $(this);
 				if ( !answerEl.attr('disabled') ) {
 					var answerNum = answerEl.data('number')
