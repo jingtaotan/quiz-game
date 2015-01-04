@@ -3,9 +3,12 @@ require_once 'php/config.php';
 
 $mysqli = getConnection();
 
+//Question per difficulty
+$limit = 5;
+
 $questions = array();
 for ($difficulty = 1; $difficulty <= 3; $difficulty++) {
-	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT 5")) {
+	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT $limit")) {
 
 		$stmt -> bind_param("s", $difficulty);
 
@@ -114,9 +117,16 @@ $mysqli -> close();
 
 			$(document).ready(function() {
 				var answers = [];
+				var questionIds = [];
 				var questionIndex = 0;
 				var timerInterval;
 				var timeTaken, timeLeft;
+				
+				//Get question id
+				var i = 0;
+				for(i=0; i< questions.length; i++){
+					questionIds[i] = questions[i].question_id;		
+				}
 
 				// DOM elements
 				var questionEl = $('#question-txt');
@@ -199,15 +209,18 @@ $mysqli -> close();
 					console.log('Quiz finished.');
 					console.log('Time taken: ' + timeTaken);
 					console.log('Time left: ' + timeLeft);
-
+					console.log(questionIds);
+					
 					$('#quiz-screen').hide();
 					$('#finished-screen').show();
 
 					//Post to backend
 					$.post("php/check.php", {
 						answers : answers,
+						questionIds : questionIds,
 						timeTaken: timeTaken.getTime() / 1000
 					}, function(data, status) {
+						alert(data);
 						if(data === "Success"){
 							//redirect
 							window.location.href = 'result.php';
