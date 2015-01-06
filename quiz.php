@@ -6,6 +6,7 @@ $mysqli = getConnection();
 session_start();
 $token =bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
 $_SESSION["token"] = $token;
+$_SESSION['submitted'] = null;
 session_commit();
 
 $questions = array();

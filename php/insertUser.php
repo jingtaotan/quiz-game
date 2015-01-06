@@ -4,7 +4,7 @@
     
     $mysqli = getConnection();
     session_start();
-    checkSession(false);
+    checkSession(false,"token");
     
     // get Post values
     if (isset($_POST["token"])) {
@@ -21,7 +21,9 @@
             $user_time = clean($_SESSION["timeTaken"], $mysqli);
             $_SESSION["score"] = null;
             $_SESSION["timeTaken"] = null;
-    
+            $_SESSION['submitted'] = null;
+            $_SESSION["token"] = null;
+            
             session_destroy();
             // dummy values for testing. Uncomment to try it
             /*

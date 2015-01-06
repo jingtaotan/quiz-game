@@ -61,11 +61,18 @@
 					   <?php
 					       require_once 'php/config.php'; 
 					       session_start(); 
-					       checkSession(true); 
-					       echo $_SESSION["token"];  
-					       session_commit(); 
+					       checkSession(true, "submitted"); 
+					       echo $_SESSION["token"];         
 					   ?>"/>
 				</form>
+			</div>
+			<hr />
+			<div>
+			    <?php
+			        echo 'Your score is: ' . $_SESSION["score"];
+                    echo '<br /> Your time taken was: ' .$_SESSION["timeTaken"];
+                    session_commit(); 
+			    ?>
 			</div>
 			<hr />
 			<div>

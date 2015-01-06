@@ -5,9 +5,9 @@
     $mysqli = getConnection();
     
     session_start();
-    checkSession(false);
+    checkSession(false, "token");
     
-    if (isset($_POST["token"])) {
+    if (isset($_POST["token"]) && ($_SESSION['submitted'] == null) ) {
         //Post values
         $answers = $_POST["answers"];
         $questionIds = $_POST["questionIds"];
@@ -45,6 +45,7 @@
         
                 $_SESSION["score"] = round(($marks / $totalMarks) * 100);
                 $_SESSION["timeTaken"] = round($timeTaken, 2);
+                $_SESSION['submitted'] = true;
                 //echo $_SESSION["score"];
                 echo "Success";
                 session_commit();

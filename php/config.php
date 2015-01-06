@@ -18,8 +18,8 @@
 		return $str;
 	}
     
-    function checkSession($root){
-        if($_SESSION["token"]==null){
+    function checkSession($root, $session){
+        if($_SESSION[$session]==null){
             if($root){
                 header("Location: quiz.php");
             }
