@@ -39,17 +39,17 @@ require_once 'php/config.php';
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li class="active">
-								<a href="#">
-								    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> 
-								    <span class="sr-only">(current)</span>
-								</a>
+								<a href="index.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="sr-only">(current)</span> </a>
 							</li>
 							<li>
 								<a href="quiz.php">Quiz</a>
 							</li>
 							<li>
-                                <a href="#">About</a>
-                            </li>
+								<a href="#">About</a>
+							</li>
+							<li>
+								<a href="scoreBoard.php">ScoreBoard</a>
+							</li>
 						</ul>
 						<form class="navbar-form navbar-right" role="search">
 							<div class="form-group">
@@ -62,57 +62,72 @@ require_once 'php/config.php';
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
-			 <div class="container-fluid">
-                    <div id="content" class="row">
-                        <a href="#" class="thumbnail">
-                            Some image? A slider perhaps?
-                        </a>
-                    </div>
-                    <div id="footer" class="row">
-                        <div class="col-md-4">
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-			<script>
-				window.fbAsyncInit = function() {
-					FB.init({
-						appId : '1575617865987702',
-						xfbml : true,
-						version : 'v2.2'
-					});
-				};
-				( function(d, s, id) {
-						var js,
-						    fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id)) {
-							return;
-						}
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "//connect.facebook.net/en_US/sdk.js";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-			</script>
-			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+			<div class="container-fluid">
+				<div id="content" class="row">
+					<a href="#" class="thumbnail"> Some image? A slider perhaps? </a>
+				</div>
+				<script>
+					window.fbAsyncInit = function() {
+						FB.init({
+							appId : '1575617865987702',
+							xfbml : true,
+							version : 'v2.2'
+						});
+					}; ( function(d, s, id) {
+							var js,
+							    fjs = d.getElementsByTagName(s)[0];
+							if (d.getElementById(id)) {
+								return;
+							}
+							js = d.createElement(s);
+							js.id = id;
+							js.src = "//connect.facebook.net/en_US/sdk.js";
+							fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+				</script>
+				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+				<hr />
+				<div id="footer" class="row">
+					<div class="col-md-4">
+						<ul>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<ul>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<ul>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+							<li>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 

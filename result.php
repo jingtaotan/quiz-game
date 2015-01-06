@@ -76,7 +76,9 @@
 			</div>
 			<hr />
 			<div>
-				Scoreboard
+				<?php
+				    getScoreBoard();
+				?>
 			</div>
 		</div>
 

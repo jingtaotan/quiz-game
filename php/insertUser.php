@@ -41,15 +41,18 @@
     
             $stmt -> execute();
     
-            printf("%d Row inserted.\n", $stmt -> affected_rows);
-    
             echo 'Your score is: ' . $user_score;
             echo '<br /> Your time taken was: ' . $user_time;
             //Get inserted id
             //$id = $mysqli->insert_id;
-    
+            
+            /* close statement*/
             $stmt -> close();
-    
+            
+            /* close connection*/
+            $mysqli -> close();
+            
+            header("Location: ../scoreBoard.php");
             //update user
             /*$user_score = "20";
              $user_time= 10.5;
@@ -60,7 +63,6 @@
     
              printf("%d Row inserted.\n", $stmt->affected_rows);*/
     
-            $mysqli -> close();
         }
     }
 ?>

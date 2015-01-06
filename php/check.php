@@ -42,7 +42,12 @@
                     }
                     $count++;
                 }
-        
+                /* close statement */
+                $stmt -> close();
+                
+                /* close connection*/
+                $mysqli -> close();
+                    
                 $_SESSION["score"] = round(($marks / $totalMarks) * 100);
                 $_SESSION["timeTaken"] = round($timeTaken, 2);
                 $_SESSION['submitted'] = true;
