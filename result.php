@@ -57,6 +57,14 @@
 					<button type="submit" class="btn btn-default">
 						Submit
 					</button>
+					<input type="hidden" name="token" value="
+					   <?php
+					       require_once 'php/config.php'; 
+					       session_start(); 
+					       checkSession(true); 
+					       echo $_SESSION["token"];  
+					       session_commit(); 
+					   ?>"/>
 				</form>
 			</div>
 			<hr />

@@ -1,4 +1,7 @@
 <?php
+    /*Number of question Per difficulty*/
+    define("LIMIT", 5);
+    
 	/* obtain connection
 	============================================= */
 	function getConnection () {
@@ -14,6 +17,18 @@
 		$str = strip_tags($mysqli->real_escape_string(trim($str)));
 		return $str;
 	}
+    
+    function checkSession($root){
+        if($_SESSION["token"]==null){
+            if($root){
+                header("Location: quiz.php");
+            }
+            else {
+                header("Location: ../quiz.php");
+            }
+            die();
+        }
+    }
 
 	/* Include Facebook SDK for PHP
 	============================================= */

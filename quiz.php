@@ -3,12 +3,14 @@ require_once 'php/config.php';
 
 $mysqli = getConnection();
 
-//Question per difficulty
-$limit = 5;
+session_start();
+$token =bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
+$_SESSION["token"] = $token;
+session_commit();
 
 $questions = array();
 for ($difficulty = 1; $difficulty <= 3; $difficulty++) {
-	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT $limit")) {
+	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT ".LIMIT)) {
 
 		$stmt -> bind_param("s", $difficulty);
 
@@ -218,7 +220,8 @@ $mysqli -> close();
 					$.post("php/check.php", {
 						answers : answers,
 						questionIds : questionIds,
-						timeTaken: timeTaken.getTime() / 1000
+						timeTaken: timeTaken.getTime() / 1000,
+						token: "<?php echo $token; ?>"
 					}, function(data, status) {
 						alert(data);
 						if(data === "Success"){
