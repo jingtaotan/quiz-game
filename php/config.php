@@ -8,7 +8,7 @@
     
         /* connect to database
          * Params: ip, username, password, dbName*/
-        return $mysqli = new mysqli('localhost', 'root', 'klaus', 'db_quiz');
+        return $mysqli = new mysqli('localhost', 'root', '', 'db_quiz');
     }
     
     /* Prevents SQL injection but does not prevents XSS
@@ -73,7 +73,7 @@
     
     /* Get nav bar
      ============================================= */
-    function getNavBar() {
+    function getNavBar($page) {
         echo'<nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -90,16 +90,16 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active">
+                            <li '.($page == 'index'? 'class="active"':'').'>
                                 <a href="index.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="sr-only">(current)</span> </a>
                             </li>
-                            <li>
+                            <li '.($page == 'quiz'? 'class="active"':'').'>
                                 <a href="quiz.php">Quiz</a>
                             </li>
-                            <li>
+                            <li '.($page == 'about'? 'class="active"':'').'>
                                 <a href="about.php">About</a>
                             </li>
-                            <li>
+                            <li '.($page == 'scoreBoard'? 'class="active"':'').'>
                                 <a href="scoreBoard.php">ScoreBoard</a>
                             </li>
                         </ul>

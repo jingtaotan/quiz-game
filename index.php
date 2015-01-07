@@ -22,11 +22,52 @@ require_once 'php/config.php';
 	</head>
 	<body>
 		<div class="container">
-		    <?php getNavBar(); ?>
+		    <?php getNavBar("index"); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
 					<a href="#" class="thumbnail"> Some image? A slider perhaps? </a>
 				</div>
+				<div id="bottom-content" class="row">
+                    <div class="col-md-4 thumbnail">
+                        <ul>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 thumbnail">
+                        <ul>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 thumbnail">
+                        <ul>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 				<script>
 					window.fbAsyncInit = function() {
 						FB.init({

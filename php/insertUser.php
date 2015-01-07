@@ -52,7 +52,8 @@
             /* close connection*/
             $mysqli -> close();
             
-            header("Location: ../scoreBoard.php");
+            header("Location: ../scoreBoard.php?played=true");
+            die();
             //update user
             /*$user_score = "20";
              $user_time= 10.5;

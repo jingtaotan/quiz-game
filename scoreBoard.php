@@ -22,12 +22,22 @@ require_once 'php/config.php';
 	</head>
 	<body>
 		<div class="container">
-			<?php getNavBar(); ?>
+			<?php getNavBar("scoreBoard"); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
-					<?php
-                    getScoreBoard();
+				    <?php 
+				        if(isset($_GET["played"])){
+				            echo '<div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Message:</strong> Thank you for participating in our quiz!<br />
+                                <a href="quiz.php">Click here to play again</a>
+                            </div>';
+                        }
+                        getScoreBoard();
 					?>
+					<a href="quiz.php" class="btn btn-primary">Click here to play</a>
 				</div>
 				<script>
 					window.fbAsyncInit = function() {
@@ -36,7 +46,8 @@ require_once 'php/config.php';
 							xfbml : true,
 							version : 'v2.2'
 						});
-					}; ( function(d, s, id) {
+					};
+					( function(d, s, id) {
 							var js,
 							    fjs = d.getElementsByTagName(s)[0];
 							if (d.getElementById(id)) {
