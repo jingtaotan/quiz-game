@@ -7,7 +7,7 @@ require_once 'php/config.php';
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>ScoreBoard</title>
+		<title>Quiz Homepage</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -25,9 +25,8 @@ require_once 'php/config.php';
 			<?php getNavBar(); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
-					<?php
-                    getScoreBoard();
-					?>
+					<div class="col-md-8 thumbnail"> Some image? A slider perhaps? </div>
+					<div class="col-md-2 col-md-offset-2 thumbnail"> Some image? A slider perhaps? </div>
 				</div>
 				<script>
 					window.fbAsyncInit = function() {

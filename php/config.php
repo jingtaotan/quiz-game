@@ -8,7 +8,7 @@
     
         /* connect to database
          * Params: ip, username, password, dbName*/
-        return $mysqli = new mysqli('localhost', 'root', '', 'db_quiz');
+        return $mysqli = new mysqli('localhost', 'root', 'klaus', 'db_quiz');
     }
     
     /* Prevents SQL injection but does not prevents XSS
@@ -42,7 +42,7 @@
             $stmt -> bind_result($user_name, $user_score, $user_time);
             
             //Create table
-            echo '<h2>Scoreboard</h2>
+            echo '<h2>Scoreboard: Top 10</h2>
                 <table class="table table-condensed">
                 <tr>
                     <th>No</th>
@@ -69,6 +69,51 @@
     
         /* close connection*/
         $mysqli -> close();
+    }
+    
+    /* Get nav bar
+     ============================================= */
+    function getNavBar() {
+        echo'<nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Logo</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="index.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li>
+                                <a href="quiz.php">Quiz</a>
+                            </li>
+                            <li>
+                                <a href="about.php">About</a>
+                            </li>
+                            <li>
+                                <a href="scoreBoard.php">ScoreBoard</a>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                Search
+                            </button>
+                        </form>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>';
     }
     
     /* Include Facebook SDK for PHP
