@@ -22,10 +22,9 @@ require_once 'php/config.php';
 	</head>
 	<body>
 		<div class="container">
-		    <?php getNavBar("index"); ?>
+	    <?php getNavBar("index"); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
-					<a href="#" class="thumbnail"> Some image? A slider perhaps? </a>
 				</div>
 				<div id="bottom-content" class="row">
                     <div class="col-md-4 thumbnail">
@@ -68,26 +67,6 @@ require_once 'php/config.php';
                         </ul>
                     </div>
                 </div>
-				<script>
-					window.fbAsyncInit = function() {
-						FB.init({
-							appId : '1575617865987702',
-							xfbml : true,
-							version : 'v2.2'
-						});
-					}; ( function(d, s, id) {
-							var js,
-							    fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id)) {
-								return;
-							}
-							js = d.createElement(s);
-							js.id = id;
-							js.src = "//connect.facebook.net/en_US/sdk.js";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));
-				</script>
-				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 				<hr />
 				<div id="footer" class="row">
 					<div class="col-md-4">
