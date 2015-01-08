@@ -8,7 +8,7 @@
     
         /* connect to database
          * Params: ip, username, password, dbName*/
-        return $mysqli = new mysqli('localhost', 'root', '', 'db_quiz');
+        return $mysqli = new mysqli('localhost', 'root', 'klaus', 'db_quiz');
     }
     
     /* Prevents SQL injection but does not prevents XSS
@@ -94,7 +94,7 @@
                                 <a href="index.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="sr-only">(current)</span> </a>
                             </li>
                             <li '.($page == 'quiz'? 'class="active"':'').'>
-                                <a href="quiz.php">Quiz</a>
+                                <a href="quiz.php">Play Now</a>
                             </li>
                             <li '.($page == 'about'? 'class="active"':'').'>
                                 <a href="about.php">About</a>
