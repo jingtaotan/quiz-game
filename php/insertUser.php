@@ -23,8 +23,10 @@
             $_SESSION["timeTaken"] = null;
             $_SESSION['submitted'] = null;
             $_SESSION["token"] = null;
+            $_SESSION["played"] = null;
             
             session_destroy();
+            
             // dummy values for testing. Uncomment to try it
             /*
              $id = null;
@@ -51,6 +53,10 @@
             
             /* close connection*/
             $mysqli -> close();
+            
+            session_start();
+            $_SESSION["played"] = true;
+            session_commit();
             
             header("Location: ../scoreBoard.php?played=true");
             die();
