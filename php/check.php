@@ -7,7 +7,7 @@
     session_start();
     checkSession(false, "token");
     
-    if (isset($_POST["token"]) && ($_SESSION['submitted'] == null) ) {
+    if (isset($_POST["token"]) && ($_SESSION['submitted'] == null && isset($_POST["answers"])) ) {
         //Post values
         $answers = $_POST["answers"];
         $questionIds = $_POST["questionIds"];

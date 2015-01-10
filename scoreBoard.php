@@ -25,17 +25,52 @@ require_once 'php/config.php';
 			<?php getNavBar("scoreBoard"); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
-				    <?php 
-				        if(isset($_GET["played"])){
-				            echo '<div class="alert alert-success alert-dismissible" role="alert">
+					<?php
+                    if (isset($_GET["played"])) {
+                        echo '<div class="alert alert-success alert-dismissible" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <strong>Message:</strong> Thank you for participating in our quiz!<br />
                                 <a href="quiz.php">Click here to play again</a>
                             </div>';
+                    }
+                    getScoreBoard();
+                    $mysqli = getConnection();
+                    if (isset($_GET["played"]) && isset($_GET["fbId"])) {
+                        if ($stmt = $mysqli -> prepare("
+                        Select * from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
+                        u.user_time, u.user_fb FROM table_user as u, (SELECT @rownr := 0) r ORDER BY user_score DESC, user_time asc
+                        ) AS alias_name 
+                        where alias_name.user_fb=?;
+                        ")) {
+                            $fbId = clean($_GET["fbId"], $mysqli);
+                            $stmt -> bind_param('s', $fbId);
+                            $stmt -> execute();
+                            $stmt -> bind_result($rowNumber,$user_name, $user_score, $user_time, $user_fb);
+                            
+                             
+                            /*Fetch results*/
+                            while ($stmt -> fetch()) {
+                                echo '<h2>Your highest score:</h2>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    <tr>
+                                        <td>'.$rowNumber.'</td>
+                                        <td>'.$user_name.'</td>
+                                        <td>'.$user_score.'</td>
+                                        <td>'.$user_time.'</td>
+                                    </tr>
+                                  </table>';
+                            }
                         }
-                        getScoreBoard();
+                    }
+                    $mysqli->close();
 					?>
 					<a href="quiz.php" class="btn btn-primary">Click here to play</a>
 				</div>
@@ -46,8 +81,7 @@ require_once 'php/config.php';
 							xfbml : true,
 							version : 'v2.2'
 						});
-					};
-					( function(d, s, id) {
+					}; ( function(d, s, id) {
 							var js,
 							    fjs = d.getElementsByTagName(s)[0];
 							if (d.getElementById(id)) {

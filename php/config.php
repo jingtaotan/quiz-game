@@ -69,23 +69,6 @@ function getScoreBoard() {
     /* close statement */
     $stmt -> close();
 
-    /*if ($_SESSION["played"] == true) {
-        if ($stmt = $mysqli -> prepare("SET @rownr=0;
-        Select * from (SELECT  @rownr:=@rownr+1 AS rowNumber, user_name, user_score, user_time FROM table_user ORDER BY user_score DESC, 
-user_time asc) AS alias_name where alias_name.user_name=?;"))
-            $stmt->bind_param('s','');
-            $stmt -> execute();
-            $stmt -> bind_result($user_name, $user_score, $user_time);
-            echo '<table>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                      </table>';
-        }
-    }
 
     /* close connection*/
     $mysqli -> close();
