@@ -16,9 +16,10 @@ try {
 	$session = false;
 }
 
-$first_time_user = true;
+$returning_user = false;
 $user_score = '';
 $user_id = '';
+$user_array = array();
 
 if ($session) {
 	// Logged in
@@ -32,14 +33,16 @@ if ($session) {
 		$mysqli = getConnection();
 
 		// check if this user is a first-time user of our app
-		if($stmt = $mysqli -> prepare("SELECT user_score FROM table_user WHERE user_fb=?")) {
+		if($stmt = $mysqli -> prepare("SELECT * FROM table_user WHERE user_fb=?")) {
 
 			$stmt -> bind_param("s", $user_id);
 			$stmt -> execute();
-			$stmt -> bind_result($user_score);
-			if ( $stmt -> fetch() ) {
-				$succeed = true;
-				$first_time_user = false;
+			$result = $stmt -> get_result();
+
+			$user_array = $result -> fetch_assoc();
+			if ( $user_array != NULL ) {
+				$returning_user = true;
+				$user_score = $user_array['user_score'];
 			}
 
 			$stmt -> close();
@@ -50,9 +53,12 @@ if ($session) {
 	}
 }
 
-if ( !$first_time_user ) {
-	// just enter their score into the database, no need to ask them to push the Enter button
+if ( $returning_user ) {
+	// just insert their score into the DB
+	$require_from_root = true;
+	require('php/insertUser.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,42 +93,47 @@ if ( !$first_time_user ) {
 					<br>
 					Your time taken was: <?php echo $_SESSION["timeTaken"]; ?> seconds
 					<br>
-					<?php if ( !$first_time_user ) { ?>
-						Your best score is: <?php $user_score ?>
+					<?php if ( $returning_user ) { ?>
+						Your best score is: <?php echo $user_score ?>
+						<?php if ( $_SESSION['score'] > $user_score ) { ?>
+							<b>You set a new record!</b>
+						<?php } ?>
 					<?php } ?>
 				</div>
 				<div class="col-sm-6">
-						<?php if ( $first_time_user ) { ?>
-							<div id="loading">
-								Loading...
-							</div>
-							<div id="not-logged-in">
-								<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
-								<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
-							</div>
-							<div id="first-time">
-								<p>Enter your details here to stand a chance to WIN!</p>
-								<form action="php/insertUser.php" method="post">
-									<div class="form-group">
-										<label for="inputName">Name</label>
-										<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
-									</div>
-									<div class="form-group">
-										<label for="inputEmail">Email address</label>
-										<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
-									</div>
-									<div class="form-group">
-										<label for="inputPhone">Phone Number</label>
-										<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-									</div>
-									<button type="submit" class="btn btn-default">
-										Submit
-									</button>
-									<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
-									<input type="hidden" name="fbuserid" />
-								</form>
-							</div>
-						<?php } ?>
+					<div id="loading">
+						Loading...
+					</div>
+					<div id="not-logged-in">
+						<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
+						<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
+					</div>
+					<div id="logged-in">
+						<?php if ( !$returning_user ) { ?>
+							<p>Enter your details here to stand a chance to WIN!</p>
+							<form action="php/insertUser.php" method="post">
+								<div class="form-group">
+									<label for="inputName">Name</label>
+									<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
+								</div>
+								<div class="form-group">
+									<label for="inputEmail">Email address</label>
+									<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label for="inputPhone">Phone Number</label>
+									<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
+								</div>
+								<button type="submit" class="btn btn-default">
+									Submit
+								</button>
+								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
+								<input type="hidden" name="fbuserid" value="<?php echo $user_id; ?>"/>
+							</form>
+						<?php } else {
+							// we would have already entered their score into the DB
+						} ?>
+					</div>
 				</div>
 			</div>
 			<hr />
@@ -136,6 +147,8 @@ if ( !$first_time_user ) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<script>
+			var returningUser = <?php echo json_encode($returning_user); ?>;
+
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				console.log('statusChangeCallback');
@@ -146,7 +159,9 @@ if ( !$first_time_user ) {
 				// for FB.getLoginStatus().
 				if (response.status === 'connected') {
 					// Logged into your app and Facebook.
-					location.reload();
+					$('#loading').hide();
+					$('#not-logged-in').hide();
+					$('#logged-in').show();
 				} else {
 					// The person is logged into Facebook, but not your app.
 					$('#loading').hide();
@@ -183,9 +198,7 @@ if ( !$first_time_user ) {
 				//    your app or not.
 				//
 				// These three cases are handled in the callback function.
-				<?php if ( $first_time_user ) { ?>
 				FB.getLoginStatus(statusChangeCallback);
-				<?php } ?>
 
 			};
 			( function(d, s, id) {
