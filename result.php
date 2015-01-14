@@ -2,6 +2,57 @@
 require_once 'php/config.php';
 session_start();
 checkSession(true, "submitted");
+
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookJavaScriptLoginHelper;
+
+$helper = new FacebookJavaScriptLoginHelper();
+try {
+	$session = $helper->getSession();
+} catch(Exception $ex) {
+	// When validation fails or other local issues
+	$session = false;
+}
+
+$first_time_user = true;
+$user_score = '';
+$user_id = '';
+
+if ($session) {
+	// Logged in
+	try {
+		$user_profile = (new FacebookRequest(
+		$session, 'GET', '/me'
+		))->execute()->getGraphObject(GraphUser::className());
+
+		$user_id = $user_profile->getId();
+
+		$mysqli = getConnection();
+
+		// check if this user is a first-time user of our app
+		if($stmt = $mysqli -> prepare("SELECT user_score FROM table_user WHERE user_fb=?")) {
+
+			$stmt -> bind_param("s", $user_id);
+			$stmt -> execute();
+			$stmt -> bind_result($user_score);
+			if ( $stmt -> fetch() ) {
+				$succeed = true;
+				$first_time_user = false;
+			}
+
+			$stmt -> close();
+		}
+
+	} catch(FacebookRequestException $e) {
+
+	}
+}
+
+if ( !$first_time_user ) {
+	// just enter their score into the database, no need to ask them to push the Enter button
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +66,7 @@ checkSession(true, "submitted");
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/quiz.css" rel="stylesheet">
 		<style>
-			#not-logged-in, #logged-in {
+			#not-logged-in, #logged-in, #first-time {
 				display: none;
 			}
 		</style>
@@ -35,37 +86,43 @@ checkSession(true, "submitted");
 					Your score is: <?php echo $_SESSION["score"]; ?>
 					<br>
 					Your time taken was: <?php echo $_SESSION["timeTaken"]; ?> seconds
+					<br>
+					<?php if ( !$first_time_user ) { ?>
+						Your best score is: <?php $user_score ?>
+					<?php } ?>
 				</div>
 				<div class="col-sm-6">
-						<div id="loading">
-							Loading...
-						</div>
-						<div id="not-logged-in">
-							<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
-							<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
-						</div>
-						<div id="logged-in">
-							<p>Enter your details here to stand a chance to WIN!</p>
-							<form action="php/insertUser.php" method="post">
-								<div class="form-group">
-									<label for="inputName">Name</label>
-									<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
-								</div>
-								<div class="form-group">
-									<label for="inputEmail">Email address</label>
-									<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
-								</div>
-								<div class="form-group">
-									<label for="inputPhone">Phone Number</label>
-									<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-								</div>
-								<button type="submit" class="btn btn-default">
-									Submit
-								</button>
-								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
-								<input type="hidden" name="fbuserid" />
-							</form>
-						</div>
+						<?php if ( $first_time_user ) { ?>
+							<div id="loading">
+								Loading...
+							</div>
+							<div id="not-logged-in">
+								<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
+								<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
+							</div>
+							<div id="first-time">
+								<p>Enter your details here to stand a chance to WIN!</p>
+								<form action="php/insertUser.php" method="post">
+									<div class="form-group">
+										<label for="inputName">Name</label>
+										<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
+									</div>
+									<div class="form-group">
+										<label for="inputEmail">Email address</label>
+										<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="inputPhone">Phone Number</label>
+										<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
+									</div>
+									<button type="submit" class="btn btn-default">
+										Submit
+									</button>
+									<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
+									<input type="hidden" name="fbuserid" />
+								</form>
+							</div>
+						<?php } ?>
 				</div>
 			</div>
 			<hr />
@@ -89,22 +146,7 @@ checkSession(true, "submitted");
 				// for FB.getLoginStatus().
 				if (response.status === 'connected') {
 					// Logged into your app and Facebook.
-					$('#loading').hide();
-					$('#not-logged-in').hide();
-					$('#logged-in').show();
-
-					// prefill the form with user's details
-					FB.api(
-						"/me",
-						function (response) {
-							if (response && !response.error) {
-								document.forms[0].inputName.value = response.name;
-								document.forms[0].inputEmail.value = response.email;
-								document.forms[0].fbuserid.value = response.id;
-							}
-						}
-					);
-
+					location.reload();
 				} else {
 					// The person is logged into Facebook, but not your app.
 					$('#loading').hide();
@@ -126,7 +168,8 @@ checkSession(true, "submitted");
 				FB.init({
 					appId : '1575617865987702',
 					xfbml : true,
-					version : 'v2.2'
+					version : 'v2.2',
+					cookie: true
 				});
 
 				// Now that we've initialized the JavaScript SDK, we call
@@ -140,7 +183,9 @@ checkSession(true, "submitted");
 				//    your app or not.
 				//
 				// These three cases are handled in the callback function.
+				<?php if ( $first_time_user ) { ?>
 				FB.getLoginStatus(statusChangeCallback);
+				<?php } ?>
 
 			};
 			( function(d, s, id) {
