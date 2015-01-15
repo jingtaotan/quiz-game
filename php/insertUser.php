@@ -53,7 +53,7 @@
 
           /* close statement*/
           $stmt -> close();
-          die($row);
+
           if($row == 0) {
               // Insert
               $stmt = $mysqli -> prepare("INSERT INTO table_user VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -61,8 +61,8 @@
 
               $stmt -> execute();
 
-              echo 'Your score is: ' . $user_score;
-              echo '<br /> Your time taken was: ' . $user_time;
+              //echo 'Your score is: ' . $user_score;
+              //echo '<br /> Your time taken was: ' . $user_time;
               //Get inserted id
               //$id = $mysqli->insert_id;
 

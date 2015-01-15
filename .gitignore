@@ -1,0 +1,4 @@
+# Ignore all IDE specific files
+.project
+.buildpath
+.settings
