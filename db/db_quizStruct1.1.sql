@@ -66,7 +66,7 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `table_user_BUPD` BEFORE UPDATE ON `table_user` FOR EACH ROW
 BEGIN
 INSERT INTO table_user_audit
-VALUES(null,OLD.user_id,OLD.user_name,OLD.user_email,OLD.user_phone,OLD.user_fb,OLD.user_score,OLD.user_time, null);
+VALUES(null,OLD.user_id,OLD.user_name,OLD.user_email,OLD.user_phone,OLD.user_fb,OLD.user_score,OLD.user_time, DEFAULT);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -92,7 +92,7 @@ CREATE TABLE `table_user_audit` (
   `user_time` float NOT NULL,
   `createdTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -104,4 +104,4 @@ CREATE TABLE `table_user_audit` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-10 19:48:28
+-- Dump completed on 2015-01-16 17:41:41
