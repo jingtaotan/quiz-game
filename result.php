@@ -1,64 +1,28 @@
 <?php
 require_once 'php/config.php';
-session_start();
 checkSession(true, "submitted");
 
-use Facebook\FacebookRequest;
-use Facebook\GraphUser;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookJavaScriptLoginHelper;
+$beat_highscore = false;
+$user_score = $_SESSION['score'];
+$user_time = $_SESSION['timeTaken'];
 
-$helper = new FacebookJavaScriptLoginHelper();
-try {
-	$session = $helper->getSession();
-} catch(Exception $ex) {
-	// When validation fails or other local issues
-	$session = false;
-}
-
+$logged_in = false;
 $returning_user = false;
-$user_score = '';
-$user_id = '';
-$user_array = array();
+if ($fb_session && $fb_user) {
+	$logged_in = true;
+	$mysqli = getConnection();
+	$res = $mysqli->query('SELECT * from table_user where user_fb = ' . clean($fb_user->getId(), $mysqli));
+	$row = $res->fetch_object();
+	if ($row) {
+		$returning_user = true;
+		$best_score = $row->user_score;
+		$best_time = $row->user_time;
 
-if ($session) {
-	// Logged in
-	try {
-		$user_profile = (new FacebookRequest(
-		$session, 'GET', '/me'
-		))->execute()->getGraphObject(GraphUser::className());
-
-		$user_id = $user_profile->getId();
-
-		$mysqli = getConnection();
-
-		// check if this user is a first-time user of our app
-		if($stmt = $mysqli -> prepare("SELECT * FROM table_user WHERE user_fb=?")) {
-
-			$stmt -> bind_param("s", $user_id);
-			$stmt -> execute();
-			$result = $stmt -> get_result();
-
-			$user_array = $result -> fetch_assoc();
-			if ( $user_array != NULL ) {
-				$returning_user = true;
-				$user_score = $user_array['user_score'];
-			}
-
-			$stmt -> close();
-		}
-
-	} catch(FacebookRequestException $e) {
-
+		// straightaway update the user row
+		$user_obj = $row;
+		require_once('php/insertUser.php');
 	}
 }
-
-if ( $returning_user ) {
-	// just insert their score into the DB
-	$require_from_root = true;
-	require('php/insertUser.php');
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,30 +50,40 @@ if ( $returning_user ) {
 	</head>
 	<body>
 		<div id="fb-root"></div>
+		<?php var_dump($fb_session);?>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					Your score is: <?php echo $_SESSION["score"]; ?>
+					Your score is: <?php echo $user_score; ?>
 					<br>
-					Your time taken was: <?php echo $_SESSION["timeTaken"]; ?> seconds
+					Your time taken was: <?php echo $user_time; ?> seconds
 					<br>
-					<?php if ( $returning_user ) { ?>
-						Your best score is: <?php echo $user_score ?>
-						<?php if ( $_SESSION['score'] > $user_score ) { ?>
-							<b>You set a new record!</b>
-						<?php } ?>
+					<?php if ($beat_highscore) { ?>
+						You've set a new best score!
 					<?php } ?>
 				</div>
 				<div class="col-sm-6">
-					<div id="loading">
-						Loading...
-					</div>
-					<div id="not-logged-in">
-						<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
-						<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
-					</div>
-					<div id="logged-in">
-						<?php if ( !$returning_user ) { ?>
+					<?php if ($returning_user) { ?>
+						<?php if ($beat_highscore) { ?>
+							Your previous best attempt:
+						<?php } else { ?>
+							Your best attempt:
+						<?php } ?>
+						<br>
+						Score: <?php echo $best_score; ?>
+						<br>
+						Time: <?php echo $best_time; ?> seconds
+						<br>
+						<a href="scoreBoard.php">Continue</a>
+					<?php } else { ?>
+						<div id="loading">
+							Loading...
+						</div>
+						<div id="not-logged-in">
+							<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
+							<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
+						</div>
+						<div id="logged-in">
 							<p>Enter your details here to stand a chance to WIN!</p>
 							<form action="php/insertUser.php" method="post">
 								<div class="form-group">
@@ -128,12 +102,10 @@ if ( $returning_user ) {
 									Submit
 								</button>
 								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
-								<input type="hidden" name="fbuserid" value="<?php echo $user_id; ?>"/>
+								<input type="hidden" name="inputFbuserid" value=""/>
 							</form>
-						<?php } else {
-							// we would have already entered their score into the DB
-						} ?>
-					</div>
+						</div>
+					<?php } ?>
 				</div>
 			</div>
 			<hr />
@@ -147,8 +119,7 @@ if ( $returning_user ) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<script>
-			var returningUser = <?php echo json_encode($returning_user); ?>;
-
+			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				console.log('statusChangeCallback');
@@ -158,10 +129,17 @@ if ( $returning_user ) {
 				// Full docs on the response object can be found in the documentation
 				// for FB.getLoginStatus().
 				if (response.status === 'connected') {
-					// Logged into your app and Facebook.
-					$('#loading').hide();
-					$('#not-logged-in').hide();
-					$('#logged-in').show();
+					if ( !returningUser ) {
+						// Logged into your app and Facebook.
+						$('#loading').hide();
+						$('#not-logged-in').hide();
+						$('#logged-in').show();
+						FB.api('/me', function(user) {
+							document.forms[0].inputName.value = user.name;
+							document.forms[0].inputEmail.value = user.email;
+							document.forms[0].inputFbuserid.value = user.id;
+						});
+					}
 				} else {
 					// The person is logged into Facebook, but not your app.
 					$('#loading').hide();
