@@ -27,7 +27,7 @@ require_once 'php/config.php';
 				<div id="content" class="row">
 					<div class="col-md-12 thumbnail text-center">
 						<h2>Who we are?</h2>
-						Arvato is a market-leading solution provider for consumer-
+						<p>Arvato is a market-leading solution provider for consumer-
 						-oriented industries.
 						As a global services provider arvato supports business
 						customers all over the world and has successfully shaped their
@@ -35,6 +35,18 @@ require_once 'php/config.php';
 						almost 40 countries design and implement customized
 						solutions for integrated services. The group is a wholly owned
 						subsidiary of Bertelsmann.
+						</p>
+						<p>Arvato is comprised of seven solution groups:</p>
+						<ul class="list-group">
+                            <li class="list-group-item"><span class="label label-info">CRM (Customer Relationship Management) Solutions</span></li>
+                            <li class="list-group-item"><span class="label label-info">Digital Marketing</span></li>
+                            <li class="list-group-item"><span class="label label-info">Financial Solutions</span></li>
+                            <li class="list-group-item"><span class="label label-info">IT Solutions</span></li>
+                            <li class="list-group-item"><span class="label label-info">Print Solutions</span></li>
+                            <li class="list-group-item"><span class="label label-info">Replication</span></li>
+                            <li class="list-group-item"><span class="label label-info">SCM (Supply Chain Management) Solutions</span></li>
+                        </ul>
+                    </div>
 					</div>
 				</div>
 				<div id="content" class="row">
@@ -91,8 +103,8 @@ require_once 'php/config.php';
 						</p>
 						<ul class="list-group">
 						    <li class="list-group-item"><span class="label label-info">Java Technologies</span></li>
-						    <li class="list-group-item">Microsoft Technologies</li>
-						    <li class="list-group-item">SAP Business Solutions</li>
+						    <li class="list-group-item"><span class="label label-info">Microsoft Technologies</span></li>
+						    <li class="list-group-item"><span class="label label-info">SAP Business Solutions</span></li>
 						</ul>
 					</div>
 				</div>

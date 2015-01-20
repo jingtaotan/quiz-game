@@ -8,6 +8,7 @@ function getConnection() {
 
     /* connect to database
      * Params: ip, username, password, dbName*/
+    //return $mysqli = new mysqli('localhost', 'root', 'klaus', 'db_quiz');
     return $mysqli = new mysqli('localhost', 'root', 'arvatoadmin', 'db_quiz');
 }
 
@@ -100,7 +101,7 @@ function getNavBar($page) {
                                 <a href="quiz.php">Play Now</a>
                             </li>
                             <li ' . ($page == 'about' ? 'class="active"' : '') . '>
-                                <a href="about.php">About</a>
+                                <a href="about.php">About Arvato</a>
                             </li>
                             <li ' . ($page == 'scoreBoard' ? 'class="active"' : '') . '>
                                 <a href="scoreBoard.php">ScoreBoard</a>

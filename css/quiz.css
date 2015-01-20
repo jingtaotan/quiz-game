@@ -48,3 +48,9 @@ html {
 #finished-screen {
   display: none;
 }
+
+
+/*Hidding elements*/
+.childHidden{
+    display: none;
+}

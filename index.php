@@ -22,93 +22,71 @@ require_once 'php/config.php';
 	</head>
 	<body>
 		<div class="container">
-	    <?php getNavBar("index"); ?>
+			<?php getNavBar("index"); ?>
 			<div class="container-fluid">
-				<div id="content" class="row">
+				<div class="row">
+					<div class="col-md-12 thumbnail">
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What is this quiz?</h2>
+						<div class="childHidden">
+							<p>
+								This quiz is a competition organized by our company in-conjunction with our participation for the career fair 2015.
+							</p>
+							<p>
+								This quiz contains questions which are mostly general knowledge. So make sure to brush up your general knowledge before playing this quiz.
+							</p>
+						</div>
+					</div>
 				</div>
-				<div id="bottom-content" class="row">
-                    <div class="col-md-4 thumbnail">
-                        <ul>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 thumbnail">
-                        <ul>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 thumbnail">
-                        <ul>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="col-md-12 thumbnail">
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I play this quiz?</h2>
+						<div class="childHidden">
+							<p>
+								Very simple, just click the "Play Now" link at the top of our navigation bar.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 thumbnail">
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What prizes do we have?</h2>
+						<div class="childHidden">
+							<p>
+								First Prize
+							</p>
+							<p>
+								Second Prize
+							</p>
+							<p>
+								Third Prize
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 thumbnail">
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I stand a chance to win a prize?</h2>
+						<div class="childHidden">
+							<p>
+								1) Make sure to login using your facebook and click "play game" after completing the quiz.
+							</p>
+							<p>
+								2) You must also make it to the top 3 of our scoreboard.
+							</p>
+							<p>
+								3) Good news is that you can keep playing the quiz to try to get a higher score(We only keep your highest score).
+							</p>
+							<p>
+								4) The top 3 will be selected and announce on the last day of the career fair (8th of February 2015).
+							</p>
+						</div>
+					</div>
+				</div>
 				<hr />
-				<div id="footer" class="row">
-					<div class="col-md-4">
-						<ul>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-							<li>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							</li>
-						</ul>
-					</div>
-				</div>
 			</div>
 		</div>
 
@@ -116,5 +94,11 @@ require_once 'php/config.php';
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
+		<script>
+			$(".parrentHidden").click(function() {
+			    $(this).children('.glyphicon').toggle();
+				$(this).next('.childHidden').slideToggle();
+			});
+		</script>
 	</body>
 </html>
