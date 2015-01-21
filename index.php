@@ -24,71 +24,66 @@ require_once 'php/init.php';
 		<div id="fb-root"></div>
 		<div class="container">
 			<?php getNavBar("index"); ?>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
-						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What is this quiz?</h2>
-						<div class="childHidden">
-							<p>
-								This quiz is a competition organized by our company in-conjunction with our participation for the career fair 2015.
-							</p>
-							<p>
-								This quiz contains questions which are mostly general knowledge. So make sure to brush up your general knowledge before playing this quiz.
-							</p>
+			<section class="row">
+				<div class="col-sm-6">
+					<h1 class="xl">Play now<br/>and win!</h1>
+					<h2>arvato's World Fact Quiz</h2>
+					<p class="lead">
+						Put your knowledge of the world to the test in, and stand a chance to win
+						<span class="placeholder"><b>Parkson shopping vouchers</b> worth up to <b>RM300!</b></span>
+					</p>
+					<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php">Play Now</a>
+				</div>
+				<div class="col-sm-6">
+					<img src="img/vouchers.png" alt="Vouchers" style="width: 100%;" />
+				</div>
+			</section>
+			<section class="row">
+				<div class="col-sm-8">
+					<h2>How it works</h2>
+					<ol>
+						<li>Click the <a href="quiz.php">Play Now</a> button.</li>
+						<li>Answer as many questions as you can correctly in 60 seconds.</li>
+						<li>Click Login to enter the competition with your Facebook account.</li>
+						<li>Play again as many times as you like to improve your score and finish in the top 3 to win prizes!</li>
+					</ol>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Tip!</h3>
+						</div>
+						<div class="panel-body">
+							Improve your chances of winning, <a href="about.php">click here</a> to find out more about arvato IT Solutions.
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
-						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I play this quiz?</h2>
-						<div class="childHidden">
-							<p>
-								Very simple, just click the "Play Now" link at the top of our navigation bar.
-							</p>
-						</div>
-					</div>
+			</section>
+			<section class="row">
+				<div class="col-sm-6">
+					<h2>Prizes</h2>
+					<p>There are 3 prizes up for grabs for the top 3 contestants:</p>
+					<ul>
+						<li><b>First prize:</b> <span class="placeholder">1 x RM300 Parkson shopping voucher</span></li>
+						<li><b>1st runner-up:</b> <span class="placeholder">1 x RM200 Parkson shopping voucher</span></li>
+						<li><b>2nd runner-up:</b> <span class="placeholder">	1 x RM100 Parkson shopping voucher</span></li>
+					</ul>
 				</div>
-				<div class="row">
-					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
-						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What prizes do we have?</h2>
-						<div class="childHidden">
-							<p>
-								First Prize
-							</p>
-							<p>
-								Second Prize
-							</p>
-							<p>
-								Third Prize
-							</p>
-						</div>
-					</div>
+				<div class="col-sm-6">
+					<h2>Come visit arvato at the JobsCentral Career Fair 2015!</h2>
+					<p>
+						Find out more about what arvato IT Solutions does, and job opportunities available for
+						jobseekers of all experience levels, from fresh graduates to experienced professionals.
+					</p>
+					<p>
+						<b>Date:</b> 7 - 8 February 2015
+						<br>
+						<b>Time:</b> 11:00AM - 6:00PM
+						<br>
+						<b>Venue:</b> Kuala Lumpur Convention Centre, Halls 4-6 (free admission)
+					</p>
 				</div>
-				<div class="row">
-					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
-						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I stand a chance to win a prize?</h2>
-						<div class="childHidden">
-							<p>
-								1) Make sure to login using your facebook and click "play game" after completing the quiz.
-							</p>
-							<p>
-								2) You must also make it to the top 3 of our scoreboard.
-							</p>
-							<p>
-								3) Good news is that you can keep playing the quiz to try to get a higher score(We only keep your highest score).
-							</p>
-							<p>
-								4) The top 3 will be selected and announce on the last day of the career fair (8th of February 2015).
-							</p>
-						</div>
-					</div>
-				</div>
-				<hr />
-			</div>
+			</section>
 		</div>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

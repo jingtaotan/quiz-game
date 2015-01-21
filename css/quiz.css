@@ -7,6 +7,30 @@
   user-select: none;
 }*/
 
+/* Homepage styles */
+span.placeholder {
+  background: yellow;
+}
+h1.xl {
+  font-size: 60px;
+}
+section {
+  padding: 8px 0;
+}
+section.alternate {
+  background: #ccc;
+}
+#play-now-btn {
+  font-size: 3em;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  section {
+    padding: 32px 0;
+  }
+}
+
 /* Don't want the xl breakpoint size */
 .container {
   max-width: 970px;
@@ -31,7 +55,7 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  body {
+  body.quiz {
     font-size: 200%;
   }
   .panel-body {

@@ -63,7 +63,7 @@ shuffle($questions);
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body>
+	<body class="quiz">
 		<script>
 			window.fbAsyncInit = function() {
 				FB.init({
