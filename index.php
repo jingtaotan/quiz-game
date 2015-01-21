@@ -22,7 +22,6 @@ require_once 'php/config.php';
 	</head>
 	<body>
 		<div id="fb-root"></div>
-		<?php var_dump($fb_session);?>
 		<div class="container">
 			<?php getNavBar("index"); ?>
 			<div class="container-fluid">

@@ -5,13 +5,15 @@ checkSession(true, "submitted");
 $beat_highscore = false;
 $user_score = $_SESSION['score'];
 $user_time = $_SESSION['timeTaken'];
+$fb_id = "";
 
 $logged_in = false;
 $returning_user = false;
 if ($fb_session && $fb_user) {
 	$logged_in = true;
 	$mysqli = getConnection();
-	$res = $mysqli->query('SELECT * from table_user where user_fb = ' . clean($fb_user->getId(), $mysqli));
+    $fb_id = clean($fb_user->getId(), $mysqli);
+	$res = $mysqli->query('SELECT * from table_user where user_fb = ' . $fb_id);
 	$row = $res->fetch_object();
 	if ($row) {
 		$returning_user = true;
@@ -50,7 +52,6 @@ if ($fb_session && $fb_user) {
 	</head>
 	<body>
 		<div id="fb-root"></div>
-		<?php var_dump($fb_session);?>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
@@ -74,7 +75,7 @@ if ($fb_session && $fb_user) {
 						<br>
 						Time: <?php echo $best_time; ?> seconds
 						<br>
-						<a href="scoreBoard.php">Continue</a>
+						<a href="scoreBoard.php?played=true&fbId=<?php echo $fb_id; ?>">Continue</a>
 					<?php } else { ?>
 						<div id="loading">
 							Loading...

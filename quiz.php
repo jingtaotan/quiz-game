@@ -82,7 +82,6 @@ shuffle($questions);
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
 		</script>
-		<?php var_dump($fb_session);?>
 
 		<div class="container">
 
