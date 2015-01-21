@@ -1,5 +1,5 @@
 <?php
-require_once 'php/config.php';
+require_once 'php/init.php';
 checkSession(true, "submitted");
 
 $beat_highscore = false;

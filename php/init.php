@@ -1,6 +1,6 @@
 <?php
 /*Number of question Per difficulty*/
-define("LIMIT", 1);
+define("LIMIT", $config->questions_per_difficulty);
 
 // always have a PHP session
 // it is needed for Facebook API for PHP to work correctly
@@ -14,8 +14,12 @@ function getConnection() {
 
     /* connect to database
      * Params: ip, username, password, dbName*/
-    //return $mysqli = new mysqli('localhost', 'root', 'klaus', 'db_quiz');
-    return $mysqli = new mysqli('localhost', 'root', 'arvatoadmin', 'db_quiz');
+    return $mysqli = new mysqli(
+      $config->db_host,
+      $config->db_username,
+      $config->db_password,
+      $config->db_name,
+    );
 }
 
 /* Prevents SQL injection but does not prevents XSS
@@ -136,7 +140,10 @@ use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
 use Facebook\GraphUser;
 
-FacebookSession::setDefaultApplication('1575617865987702', '5c05ca25c9942706958b507656f3e2fd');
+FacebookSession::setDefaultApplication(
+  $config->fb_appid,
+  $config->fb_appsecret
+);
 
 $helper = new FacebookJavaScriptLoginHelper();
 $fb_session = false; // throughout the site we detect if $fb_session == false to determine if the user is logged in
