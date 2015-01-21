@@ -2,3 +2,8 @@
 .project
 .buildpath
 .settings
+
+# Ignore the configuration file
+# When deploying or checking out, make a copy of php/config.template.php,
+#   rename to php/config.php and modify. php/config.php will not be committed.
+php/config.php

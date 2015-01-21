@@ -1,4 +1,7 @@
 <?php
+
+require('config.php');
+
 /*Number of question Per difficulty*/
 define("LIMIT", $config->questions_per_difficulty);
 
@@ -18,7 +21,7 @@ function getConnection() {
       $config->db_host,
       $config->db_username,
       $config->db_password,
-      $config->db_name,
+      $config->db_name
     );
 }
 
