@@ -51,7 +51,7 @@ function getScoreBoard($fbId) {
     $mysqli = getConnection();
     $count = 0;
     $isTop = false;
-    
+
     if ($stmt = $mysqli -> prepare("SELECT user_name, user_score, user_time, user_fb FROM table_user ORDER BY user_score DESC, user_time asc LIMIT 10")) {
 
         $stmt -> execute();
@@ -88,7 +88,7 @@ function getScoreBoard($fbId) {
     }
     /* close statement */
     $stmt -> close();
-    
+
     if(!$isTop){
         if ($stmt = $mysqli -> prepare("
                         Select * from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
@@ -99,7 +99,7 @@ function getScoreBoard($fbId) {
                             $stmt -> bind_param('s', $fbId);
                             $stmt -> execute();
                             $stmt -> bind_result($rowNumber,$user_name, $user_score, $user_time, $user_fb);
-    
+
 
                             /*Fetch results*/
                             while ($stmt -> fetch()) {
@@ -131,7 +131,7 @@ function getScoreBoard($fbId) {
  ============================================= */
 function getNavBar($page) {
     echo '<nav class="navbar navbar-default">
-                <div class="container-fluid">
+                <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">

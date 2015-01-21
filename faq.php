@@ -22,8 +22,8 @@ require_once 'php/init.php';
 	</head>
 	<body>
 		<div id="fb-root"></div>
+		<?php getNavBar("faq"); ?>
 		<div class="container">
-			<?php getNavBar("index"); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 thumbnail">

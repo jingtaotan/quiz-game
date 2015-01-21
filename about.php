@@ -21,8 +21,8 @@ require_once 'php/init.php';
 		<![endif]-->
 	</head>
 	<body>
+		<?php getNavBar("about"); ?>
 		<div class="container">
-			<?php getNavBar("about"); ?>
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 thumbnail">
@@ -151,7 +151,7 @@ require_once 'php/init.php';
                             <p>
                                 <h2>Email:</h2>
                                 hr.my@bertelsmann.de
-                                
+
                             </p>
                             <p>
                                <h2>Phone Number:</h2>

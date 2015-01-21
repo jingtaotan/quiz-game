@@ -21,8 +21,8 @@ require_once 'php/init.php';
 		<![endif]-->
 	</head>
 	<body>
+		<?php getNavBar("scoreBoard"); ?>
 		<div class="container">
-			<?php getNavBar("scoreBoard"); ?>
 			<div class="container-fluid">
 				<div id="content" class="row">
 					<?php
@@ -37,36 +37,14 @@ require_once 'php/init.php';
                     }
                     $mysqli = getConnection();
                     $fbId = null;
-                    if (isset($_GET["fbId"])) { 
-                            $fbId = clean($_GET["fbId"], $mysqli);  
+                    if (isset($_GET["fbId"])) {
+                            $fbId = clean($_GET["fbId"], $mysqli);
                     }
                     getScoreBoard($fbId);
                     $mysqli->close();
 					?>
-					<a href="quiz.php" class="btn btn-primary">Click here to play</a>
+					<a href="quiz.php" class="btn btn-lg btn-primary">Play Now</a>
 				</div>
-				<script>
-					window.fbAsyncInit = function() {
-						FB.init({
-							appId : '<?php echo $config->fb_appid; ?>',
-							xfbml : true,
-							version : 'v2.2'
-						});
-					}; ( function(d, s, id) {
-							var js,
-							    fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id)) {
-								return;
-							}
-							js = d.createElement(s);
-							js.id = id;
-							js.src = "//connect.facebook.net/en_US/sdk.js";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));
-				</script>
-				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
-				<hr />
-
 			</div>
 		</div>
 

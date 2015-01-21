@@ -52,6 +52,7 @@ if ($fb_session && $fb_user) {
 	</head>
 	<body>
 		<div id="fb-root"></div>
+		<?php getNavBar("result"); ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
