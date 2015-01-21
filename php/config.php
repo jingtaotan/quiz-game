@@ -4,7 +4,9 @@ define("LIMIT", 1);
 
 // always have a PHP session
 // it is needed for Facebook API for PHP to work correctly
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 
 /* obtain connection
  ============================================= */
