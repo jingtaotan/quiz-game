@@ -3,7 +3,6 @@ require_once 'php/config.php';
 
 $mysqli = getConnection();
 
-session_start();
 $token =bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
 $_SESSION["token"] = $token;
 $_SESSION['submitted'] = null;
@@ -83,6 +82,7 @@ shuffle($questions);
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));
 		</script>
+		<?php var_dump($fb_session);?>
 
 		<div class="container">
 
@@ -125,11 +125,11 @@ shuffle($questions);
 				var questionIndex = 0;
 				var timerInterval;
 				var timeTaken, timeLeft;
-				
+
 				//Get question id
 				var i = 0;
 				for(i=0; i< questions.length; i++){
-					questionIds[i] = questions[i].question_id;		
+					questionIds[i] = questions[i].question_id;
 				}
 
 				// DOM elements
@@ -214,7 +214,7 @@ shuffle($questions);
 					console.log('Time taken: ' + timeTaken);
 					console.log('Time left: ' + timeLeft);
 					console.log(questionIds);
-					
+
 					$('#quiz-screen').hide();
 					$('#finished-screen').show();
 

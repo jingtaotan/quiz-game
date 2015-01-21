@@ -49,7 +49,7 @@ CREATE TABLE `table_user` (
   `user_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `user_fb` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_score` char(2) COLLATE utf8_unicode_ci NOT NULL,
+  `user_score` int(2) COLLATE utf8_unicode_ci NOT NULL,
   `user_time` float NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -88,7 +88,7 @@ CREATE TABLE `table_user_audit` (
   `user_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_phone` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `user_fb` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `user_score` char(2) COLLATE utf8_unicode_ci NOT NULL,
+  `user_score` int(2) COLLATE utf8_unicode_ci NOT NULL,
   `user_time` float NOT NULL,
   `createdTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

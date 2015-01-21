@@ -21,6 +21,7 @@ require_once 'php/config.php';
 		<![endif]-->
 	</head>
 	<body>
+		<?php var_dump($fb_session);?>
 		<div class="container">
 			<?php getNavBar("about"); ?>
 			<div class="container-fluid">

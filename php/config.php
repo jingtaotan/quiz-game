@@ -1,6 +1,10 @@
 <?php
 /*Number of question Per difficulty*/
-define("LIMIT", 10);
+define("LIMIT", 1);
+
+// always have a PHP session
+// it is needed for Facebook API for PHP to work correctly
+session_start();
 
 /* obtain connection
  ============================================= */
@@ -28,7 +32,6 @@ function checkSession($root, $session) {
         } else {
             header("Location: ../quiz.php");
         }
-        die();
     }
 }
 
@@ -127,8 +130,50 @@ require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIR
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
-use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
+use Facebook\FacebookJavaScriptLoginHelper;
+use Facebook\GraphUser;
 
 FacebookSession::setDefaultApplication('1575617865987702', '5c05ca25c9942706958b507656f3e2fd');
+
+$helper = new FacebookJavaScriptLoginHelper();
+$fb_session = false; // throughout the site we detect if $fb_session == false to determine if the user is logged in
+$fb_user = false; // the Facebook user object
+try {
+  $fb_session = $helper->getSession();
+} catch(Exception $ex) {
+  // When validation fails or other local issues
+  error_log($ex);
+}
+
+if ($fb_session) {
+  // store access token in PHP session for later use
+  $_SESSION['fb_access_token'] = $fb_session->getToken();
+} else {
+  // try recreating the session based on the last used access token
+  if (isset($_SESSION['fb_access_token'])) {
+    $fb_session = new FacebookSession($_SESSION['fb_access_token']);
+    try {
+      $fb_session->validate();
+    } catch (\Exception $ex) {
+      // Session not valid, Graph API returned an exception with the reason. OR
+      // Graph API returned info, but it may mismatch the current app or have expired.
+      unset($_SESSION['fb_access_token']); // get rid of the invalid key
+      error_log($ex);
+      $fb_session = false;
+    }
+  }
+}
+
+// also try to get the current FB user object
+if ($fb_session) {
+  try {
+    $fb_user = (new FacebookRequest(
+        $fb_session, 'GET', '/me'
+        ))->execute()->getGraphObject(GraphUser::className());
+  } catch(FacebookRequestException $e) {
+    error_log($e);
+  }
+}
+
 ?>
