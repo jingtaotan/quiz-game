@@ -27,7 +27,7 @@ require_once 'php/init.php';
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
 						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What is this quiz?</h2>
 						<div class="childHidden">
 							<p>
@@ -41,7 +41,7 @@ require_once 'php/init.php';
 				</div>
 				<div class="row">
 					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
 						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I play this quiz?</h2>
 						<div class="childHidden">
 							<p>
@@ -52,7 +52,7 @@ require_once 'php/init.php';
 				</div>
 				<div class="row">
 					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
 						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What prizes do we have?</h2>
 						<div class="childHidden">
 							<p>
@@ -69,7 +69,7 @@ require_once 'php/init.php';
 				</div>
 				<div class="row">
 					<div class="col-md-12 thumbnail">
-						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span> 
+						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
 						    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do I stand a chance to win a prize?</h2>
 						<div class="childHidden">
 							<p>
@@ -125,7 +125,7 @@ require_once 'php/init.php';
 
 			window.fbAsyncInit = function() {
 				FB.init({
-					appId : '1575617865987702',
+					appId : '<?php echo $config->fb_appid; ?>',
 					xfbml : true,
 					version : 'v2.2',
 					cookie: true

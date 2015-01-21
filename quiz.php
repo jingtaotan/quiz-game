@@ -67,7 +67,7 @@ shuffle($questions);
 		<script>
 			window.fbAsyncInit = function() {
 				FB.init({
-					appId : '1575617865987702',
+					appId : '<?php echo $config->fb_appid; ?>',
 					xfbml : true,
 					version : 'v2.2'
 				});

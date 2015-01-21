@@ -41,15 +41,15 @@ require_once 'php/init.php';
                         if ($stmt = $mysqli -> prepare("
                         Select * from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
                         u.user_time, u.user_fb FROM table_user as u, (SELECT @rownr := 0) r ORDER BY user_score DESC, user_time asc
-                        ) AS alias_name 
+                        ) AS alias_name
                         where alias_name.user_fb=?;
                         ")) {
                             $fbId = clean($_GET["fbId"], $mysqli);
                             $stmt -> bind_param('s', $fbId);
                             $stmt -> execute();
                             $stmt -> bind_result($rowNumber,$user_name, $user_score, $user_time, $user_fb);
-                            
-                             
+
+
                             /*Fetch results*/
                             while ($stmt -> fetch()) {
                                 echo '<h2>Your highest score:</h2>
@@ -77,7 +77,7 @@ require_once 'php/init.php';
 				<script>
 					window.fbAsyncInit = function() {
 						FB.init({
-							appId : '1575617865987702',
+							appId : '<?php echo $config->fb_appid; ?>',
 							xfbml : true,
 							version : 'v2.2'
 						});

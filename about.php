@@ -140,7 +140,7 @@ require_once 'php/init.php';
 			<script>
 				window.fbAsyncInit = function() {
 					FB.init({
-						appId : '1575617865987702',
+						appId : '<?php echo $config->fb_appid; ?>',
 						xfbml : true,
 						version : 'v2.2'
 					});
@@ -159,7 +159,7 @@ require_once 'php/init.php';
 			</script>
 			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 			<hr />
-			
+
 		</div>
 		</div>
 
