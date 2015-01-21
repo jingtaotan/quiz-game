@@ -97,12 +97,11 @@ require_once 'php/config.php';
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<script>
-<<<<<<< HEAD
 			$(".parrentHidden").click(function() {
 			    $(this).children('.glyphicon').toggle();
 				$(this).next('.childHidden').slideToggle();
 			});
-=======
+
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				console.log('statusChangeCallback');
@@ -158,7 +157,6 @@ require_once 'php/config.php';
 				js.src = "//connect.facebook.net/en_US/sdk.js";
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
->>>>>>> 462f142861643f1b4c545192ac1bd3ef6758d172
 		</script>
 	</body>
 </html>
