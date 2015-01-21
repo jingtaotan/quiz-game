@@ -14,6 +14,7 @@ if(!isset($_SESSION)){
 /* obtain connection
  ============================================= */
 function getConnection() {
+    global $config;
 
     /* connect to database
      * Params: ip, username, password, dbName*/
