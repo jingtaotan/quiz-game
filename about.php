@@ -24,7 +24,7 @@ require_once 'php/init.php';
 		<div class="container">
 			<?php getNavBar("about"); ?>
 			<div class="container-fluid">
-				<div id="content" class="row">
+				<div class="row">
 					<div class="col-md-12 thumbnail">
 						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Who we are?</h2>
 						<div class="childHidden text-center">
@@ -67,7 +67,7 @@ require_once 'php/init.php';
 						</div>
 					</div>
 				</div>
-				<div id="content" class="row">
+				<div class="row">
 					<div class="col-md-12 thumbnail">
 						<h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
 						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> What do we do?</h2>
@@ -136,6 +136,30 @@ require_once 'php/init.php';
 						</div>
 					</div>
 				</div>
+				<div class="row">
+                    <div class="col-md-12 thumbnail">
+                        <h2 class="parrentHidden"><span class="glyphicon glyphicon-minus-sign childHidden" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> How do you contact us?</h2>
+                        <div class="childHidden">
+                            <p>
+                                <h2>Address:</h2>
+                                arvato Systems Malaysia Sdn Bhd
+                                Level 25, Menara IMC,
+                                No. 8, Jalan Sultan Ismail,
+                                50250 Kuala
+                            </p>
+                            <p>
+                                <h2>Email:</h2>
+                                hr.my@bertelsmann.de
+                                
+                            </p>
+                            <p>
+                               <h2>Phone Number:</h2>
+                               +60 3 2330 1988
+                            </p>
+                        </div>
+                    </div>
+                </div>
 			</div>
 			<script>
 				window.fbAsyncInit = function() {

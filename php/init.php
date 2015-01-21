@@ -47,14 +47,15 @@ function checkSession($root, $session) {
 
 /* Get scoreBoard
  ============================================= */
-function getScoreBoard() {
+function getScoreBoard($fbId) {
     $mysqli = getConnection();
     $count = 0;
-
-    if ($stmt = $mysqli -> prepare("SELECT user_name, user_score, user_time FROM table_user ORDER BY user_score DESC, user_time asc LIMIT 10")) {
+    $isTop = false;
+    
+    if ($stmt = $mysqli -> prepare("SELECT user_name, user_score, user_time, user_fb FROM table_user ORDER BY user_score DESC, user_time asc LIMIT 10")) {
 
         $stmt -> execute();
-        $stmt -> bind_result($user_name, $user_score, $user_time);
+        $stmt -> bind_result($user_name, $user_score, $user_time, $user_fb);
 
         //Create table
         echo '<h2>Scoreboard: Top 10</h2>
@@ -68,8 +69,13 @@ function getScoreBoard() {
 
         while ($stmt -> fetch()) {
             $count++;
-            echo '<tr>
-                    <td>' . $count . '</td>
+            if($user_fb == $fbId){
+                echo '<tr class="success">';
+                $isTop = true;
+            }else{
+                echo '<tr>';
+            }
+                 echo   '<td>' . $count . '</td>
                     <td>' . $user_name . '</td>
                     <td>' . $user_score . '</td>
                     <td>' . round($user_time, 2) . '</td>
@@ -82,6 +88,39 @@ function getScoreBoard() {
     }
     /* close statement */
     $stmt -> close();
+    
+    if(!$isTop){
+        if ($stmt = $mysqli -> prepare("
+                        Select * from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
+                        u.user_time, u.user_fb FROM table_user as u, (SELECT @rownr := 0) r ORDER BY user_score DESC, user_time asc
+                        ) AS alias_name
+                        where alias_name.user_fb=?;
+                        ")) {
+                            $stmt -> bind_param('s', $fbId);
+                            $stmt -> execute();
+                            $stmt -> bind_result($rowNumber,$user_name, $user_score, $user_time, $user_fb);
+    
+
+                            /*Fetch results*/
+                            while ($stmt -> fetch()) {
+                                echo '<div><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span></div>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    <tr>
+                                        <td>'.$rowNumber.'</td>
+                                        <td>'.$user_name.'</td>
+                                        <td>'.$user_score.'</td>
+                                        <td>'.$user_time.'</td>
+                                    </tr>
+                                  </table>';
+                            }
+                        }
+    }
 
 
     /* close connection*/
