@@ -111,7 +111,7 @@ if ($fb_session && $fb_user) {
 			</div>
 			<hr />
 			<div>
-				<?php getScoreBoard(); ?>
+				<?php getScoreBoard($fb_id); ?>
 			</div>
 		</div>
 
