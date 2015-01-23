@@ -135,7 +135,7 @@ if ($fb_session && $fb_user) {
 						<?php } ?>
 						<p>
 							<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
-							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true&fbId=<?php echo $fb_id; ?>">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</p>
 				<?php } else { ?>
 					<p>
