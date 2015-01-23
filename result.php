@@ -251,21 +251,25 @@ if ($fb_session && $fb_user) {
 					});
 				}
 
-				$('#share-btn').on('click', function() {
-					checkPermission(function(canPublish) {
-						if (canPublish) {
-							publishStory();
-						} else {
-							FB.login(function(response) {
-								checkPermission(function(canPublish) {
-									if (canPublish) {
-										publishStory();
-									} else {
-										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
-									}
-								});
-							}, {scope: 'publish_actions'});
-						}
+				$(document).ready(function() {
+					$('#share-btn').on('click', function() {
+
+						checkPermission(function(appCanPublish) {
+							if (appCanPublish) {
+								publishStory();
+							} else {
+								FB.login(function(response) {
+									checkPermission(function(appCanPublish) {
+										if (appCanPublish) {
+											publishStory();
+										} else {
+											alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
+										}
+									});
+								}, {scope: 'publish_actions'});
+							}
+						});
+
 					});
 				});
 
