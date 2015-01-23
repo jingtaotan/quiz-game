@@ -32,11 +32,13 @@ require_once 'php/init.php';
 						Put your knowledge of the world to the test in, and stand a chance to win
 						<span class="placeholder"><b>Parkson shopping vouchers</b> worth up to <b>RM300!</b></span>
 					</p>
-					<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php">Play Now</a>
+					<p>
+						<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php">Play Now</a>
+					</p>
+					<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 				</div>
 				<div class="col-sm-6">
 					<img src="img/vouchers.png" alt="Vouchers" style="width: 100%;" />
-					<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 				</div>
 			</section>
 			<section class="row">

@@ -24,6 +24,37 @@ section.alternate {
   font-size: 3em;
 }
 
+/* Result page */
+.btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.score-panel {
+  text-align: center;
+}
+.score-panel .panel-title {
+  font-weight: bold;
+}
+span.score {
+  font-size: 72px;
+}
+span.score s {
+  font-size: 32px;
+}
+.score-panel s {
+  opacity: 0.6;
+}
+.btn-share {
+  background-color: #3b5998;
+  border-color: rgba(0,0,0,0.2);
+  color: #fff;
+}
+.btn-share:hover, .btn-share:active, .btn-share:focus {
+  background-color: #2d4373;
+  border-color: rgba(0,0,0,0.2);
+  color: #fff;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   section {

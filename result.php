@@ -5,6 +5,7 @@ checkSession(true, "submitted");
 $beat_highscore = false;
 $user_score = $_SESSION['score'];
 $user_time = $_SESSION['timeTaken'];
+$user_rank = 3;
 $fb_id = "";
 
 $logged_in = false;
@@ -36,6 +37,7 @@ if ($fb_session && $fb_user) {
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/quiz.css" rel="stylesheet">
 		<style>
 			#not-logged-in, #logged-in, #first-time {
@@ -54,29 +56,42 @@ if ($fb_session && $fb_user) {
 		<div id="fb-root"></div>
 		<?php getNavBar("result"); ?>
 		<div class="container">
+			<h1>Game results</h1>
 			<div class="row">
 				<div class="col-sm-6">
-					Your score is: <?php echo $user_score; ?>
-					<br>
-					Your time taken was: <?php echo $user_time; ?> seconds
-					<br>
-					<?php if ($beat_highscore) { ?>
-						You've set a new best score!
-					<?php } ?>
+					<div class="panel panel-primary score-panel">
+						<div class="panel-heading">
+							<h2 class="panel-title">Your score</h2>
+						</div>
+						<div class="panel-body">
+							<span class="score"><?php echo $user_score; ?></span><br/>
+							(<?php echo $user_time; ?> seconds)
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-6">
 					<?php if ($returning_user) { ?>
 						<?php if ($beat_highscore) { ?>
-							Your previous best attempt:
+							<div class="panel panel-success score-panel">
+								<div class="panel-heading">
+									<h2 class="panel-title">New best score!</h2>
+								</div>
+								<div class="panel-body">
+									<span class="score"><s><?php echo $best_score; ?></s> <?php echo $user_score; ?></span><br/>
+									(<s><?php echo $best_time; ?></s> <?php echo $user_time; ?> seconds)
+								</div>
+							</div>
 						<?php } else { ?>
-							Your best attempt:
+							<div class="panel panel-info score-panel">
+								<div class="panel-heading">
+									<h2 class="panel-title">Best score</h2>
+								</div>
+								<div class="panel-body">
+									<span class="score"><?php echo $best_score; ?></span><br/>
+									(<?php echo $best_time; ?> seconds)
+								</div>
+							</div>
 						<?php } ?>
-						<br>
-						Score: <?php echo $best_score; ?>
-						<br>
-						Time: <?php echo $best_time; ?> seconds
-						<br>
-						<a href="scoreBoard.php?played=true&fbId=<?php echo $fb_id; ?>">Continue</a>
 					<?php } else { ?>
 						<div id="loading">
 							Loading...
@@ -110,9 +125,23 @@ if ($fb_session && $fb_user) {
 					<?php } ?>
 				</div>
 			</div>
-			<hr />
-			<div>
-				<?php getScoreBoard($fb_id); ?>
+			<div class="row text-center">
+				<?php if ($returning_user) { ?>
+						<h3>You are currently at <mark>rank #<?php echo $user_rank; ?>.</mark></h3>
+						<?php if ($user_rank > 3) { ?>
+							<p class="lead">Keep playing to improve your score and make it to the <mark>top 3</mark> to win a prize!</p>
+						<?php } else { ?>
+							<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
+						<?php } ?>
+						<p>
+							<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
+							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true&fbId=<?php echo $fb_id; ?>">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
+						</p>
+				<?php } else { ?>
+					<p>
+						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
+					</p>
+				<?php } ?>
 			</div>
 		</div>
 
@@ -124,8 +153,6 @@ if ($fb_session && $fb_user) {
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
-				console.log('statusChangeCallback');
-				console.log(response);
 				// The response object is returned with a status field that lets the
 				// app know the current login status of the person.
 				// Full docs on the response object can be found in the documentation
@@ -179,6 +206,68 @@ if ($fb_session && $fb_user) {
 				//
 				// These three cases are handled in the callback function.
 				FB.getLoginStatus(statusChangeCallback);
+
+				var publishStory = function() {
+					FB.api(
+						"/me/feed",
+						"POST",
+						{
+							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Quiz! Can you beat my score?",
+							link: "http://quiz.arvato-systems.asia/quiz/",
+							actions: [{
+								name: "Play Now",
+								link: "http://quiz.arvato-systems.asia/quiz/"
+							}]
+						},
+						function (response) {
+							if (response && !response.error) {
+								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
+							} else {
+								if ( response.error.code == 200 ) {
+									alert('You need to grant us permission to post to Facebook for you. Click Share to try again.')
+								} else {
+									alert('Oops! Something seems to have went wrong when sharing to Facebook. Try again later.');
+								}
+							}
+						}
+					);
+				};
+
+				var checkPermission = function(callback) {
+					FB.api('/me/permissions', function(response) {
+						var canPublish = false;
+						var perms = response.data;
+						var i = 0;
+						for ( i = 0 ; i < perms.length ; i++) {
+							var perm = perms[i];
+							if ( perm.permission != 'publish_actions' ) {
+								continue;
+							}
+							if ( perm.status == 'granted' ) {
+								canPublish = true;
+							}
+						}
+						callback.call(this, canPublish);
+					});
+				}
+
+				$('#share-btn').on('click', function() {
+					checkPermission(function(canPublish) {
+						if (canPublish) {
+							publishStory();
+						} else {
+							FB.login(function(response) {
+								checkPermission(function(canPublish) {
+									if (canPublish) {
+										publishStory();
+									} else {
+										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
+									}
+								});
+							}, {scope: 'publish_actions'});
+						}
+					});
+				});
 
 			};
 			( function(d, s, id) {
