@@ -218,7 +218,4 @@ if ($fb_session) {
     error_log($e);
   }
 }
-
-var_dump($fb_session);
-
 ?>
