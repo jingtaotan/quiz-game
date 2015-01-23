@@ -185,7 +185,7 @@ $fb_session = false; // throughout the site we detect if $fb_session == false to
 $fb_user = false; // the Facebook user object
 try {
   $fb_session = $helper->getSession();
-} catch(Exception $ex) {
+} catch(\Exception $ex) {
   // When validation fails or other local issues
   error_log($ex);
 }
