@@ -232,13 +232,14 @@ if ($fb_session && $fb_user) {
 						},
 						function (response) {
 							if (response && !response.error) {
-								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
+								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!');
 							} else {
 								if ( response.error.code == 200 ) {
 									alert('You need to grant us permission to post to Facebook for you. Click Share to try again.')
 								} else {
 									alert('Oops! Something seems to have went wrong when sharing to Facebook. Try again later.');
 								}
+								$('#share-btn').removeAttr('disabled');
 							}
 						}
 					);
@@ -275,7 +276,9 @@ if ($fb_session && $fb_user) {
 						}, {scope: 'public_profile,email'});
 					});
 
-					$('#share-btn').on('click', function() {
+					var shareBtn = $('#share-btn')
+					shareBtn.on('click', function() {
+						shareBtn.attr('disabled', '');
 						if (appCanPublish) {
 							publishStory();
 						} else {
@@ -285,6 +288,7 @@ if ($fb_session && $fb_user) {
 										publishStory();
 									} else {
 										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
+										shareBtn.removeAttr('disabled');
 									}
 								});
 							}, {scope: 'publish_actions', auth_type: 'rerequest'});
