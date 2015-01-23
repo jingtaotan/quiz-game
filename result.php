@@ -151,6 +151,9 @@ if ($fb_session && $fb_user) {
 		<script src="js/bootstrap.min.js"></script>
 		<script>
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
+
+			var appCanPublish = false;
+
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				// The response object is returned with a status field that lets the
@@ -251,7 +254,10 @@ if ($fb_session && $fb_user) {
 						}
 						callback.call(this, canPublish);
 					});
-				}
+				};
+				checkPermission(function(result) {
+					appCanPublish = result;
+				});
 
 				$(document).ready(function() {
 					$('#login-btn').on('click', function() {
@@ -264,23 +270,19 @@ if ($fb_session && $fb_user) {
 					});
 
 					$('#share-btn').on('click', function() {
-
-						checkPermission(function(appCanPublish) {
-							if (appCanPublish) {
-								publishStory();
-							} else {
-								FB.login(function(response) {
-									checkPermission(function(appCanPublish) {
-										if (appCanPublish) {
-											publishStory();
-										} else {
-											alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
-										}
-									});
-								}, {scope: 'publish_actions'});
-							}
-						});
-
+						if (appCanPublish) {
+							publishStory();
+						} else {
+							FB.login(function(response) {
+								checkPermission(function(appCanPublish) {
+									if (appCanPublish) {
+										publishStory();
+									} else {
+										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
+									}
+								});
+							}, {scope: 'publish_actions', auth_type: 'rerequest'});
+						}
 					});
 				});
 
