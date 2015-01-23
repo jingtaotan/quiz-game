@@ -224,10 +224,10 @@ if ($fb_session && $fb_user) {
 						"POST",
 						{
 							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Quiz! Can you beat my score?",
-							link: "http://quiz.arvato-systems.asia/quiz/",
+							link: "http://quiz.arvato-systems.asia/",
 							actions: [{
 								name: "Play Now",
-								link: "http://quiz.arvato-systems.asia/quiz/"
+								link: "http://quiz.arvato-systems.asia/"
 							}]
 						},
 						function (response) {
