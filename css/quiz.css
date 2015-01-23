@@ -8,6 +8,9 @@
 }*/
 
 /* Homepage styles */
+.navbar-brand {
+  padding: 2px 10px;
+}
 span.placeholder {
   background: yellow;
 }

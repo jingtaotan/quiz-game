@@ -7,7 +7,9 @@ require_once 'php/init.php';
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Quiz Homepage</title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<title>Play arvato World Fact Quiz now and win!</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +29,7 @@ require_once 'php/init.php';
 			<section class="row">
 				<div class="col-sm-6">
 					<h1 class="xl">Play now<br/>and win!</h1>
-					<h2>arvato's World Fact Quiz</h2>
+					<h2>arvato World Fact Quiz</h2>
 					<p class="lead">
 						Put your knowledge of the world to the test in, and stand a chance to win
 						<span class="placeholder"><b>Parkson shopping vouchers</b> worth up to <b>RM300!</b></span>

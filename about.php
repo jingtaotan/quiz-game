@@ -7,7 +7,9 @@ require_once 'php/init.php';
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Quiz Homepage</title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<title>arvato IT Solutions Malaysia</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -176,7 +178,7 @@ require_once 'php/init.php';
 				$(this).children('.glyphicon').toggle();
 				$(this).next('.childHidden').slideToggle();
 			});
-			
+
 			window.fbAsyncInit = function() {
 				FB.init({
 					appId : '<?php echo $config->fb_appid; ?>',

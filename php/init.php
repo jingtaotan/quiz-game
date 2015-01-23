@@ -140,15 +140,14 @@ function getNavBar($page) {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Logo</a>
+                        <a class="navbar-brand" href="index.php">
+                          <img src="img/arvato-logo.png" alt="arvato Bertelsmann logo" />
+                        </a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li ' . ($page == 'index' ? 'class="active"' : '') . '>
-                                <a href="index.php"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="sr-only">(current)</span> </a>
-                            </li>
                             <li ' . ($page == 'quiz' ? 'class="active"' : '') . '>
                                 <a href="quiz.php">Play Now</a>
                             </li>
