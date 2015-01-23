@@ -98,7 +98,7 @@ if ($fb_session && $fb_user) {
 						</div>
 						<div id="not-logged-in">
 							<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
-							<fb:login-button scope="public_profile,email" show-faces="true" onlogin="checkLoginState();"></fb:login-button>
+							<button class="btn btn-share btn-lg" id="login-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Log in with Facebook</button>
 						</div>
 						<div id="logged-in">
 							<p>Enter your details here to stand a chance to WIN!</p>
@@ -133,12 +133,12 @@ if ($fb_session && $fb_user) {
 						<?php } else { ?>
 							<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
 						<?php } ?>
-						<p>
+						<p id="share-area">
 							<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
 							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</p>
 				<?php } else { ?>
-					<p>
+					<p id="share-area" style="display: none;">
 						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
 					</p>
 				<?php } ?>
@@ -163,6 +163,7 @@ if ($fb_session && $fb_user) {
 						$('#loading').hide();
 						$('#not-logged-in').hide();
 						$('#logged-in').show();
+						$('#share-area').show();
 						FB.api('/me', function(user) {
 							document.forms[0].inputName.value = user.name;
 							document.forms[0].inputEmail.value = user.email;
@@ -174,6 +175,7 @@ if ($fb_session && $fb_user) {
 					$('#loading').hide();
 					$('#not-logged-in').show();
 					$('#logged-in').hide();
+					$('#share-area').hide();
 				}
 			}
 
@@ -252,6 +254,15 @@ if ($fb_session && $fb_user) {
 				}
 
 				$(document).ready(function() {
+					$('#login-btn').on('click', function() {
+						FB.login(function(response) {
+							if (response && !response.error) {
+								// refresh the page
+								location.reload();
+							}
+						}, {scope: 'public_profile,email'});
+					});
+
 					$('#share-btn').on('click', function() {
 
 						checkPermission(function(appCanPublish) {
