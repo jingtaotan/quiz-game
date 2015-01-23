@@ -70,7 +70,7 @@ shuffle($questions);
 			<div class="header">
 				<div class="timer">
 					<span id="timer-txt">01:00.0</span>
-					<a href="#" id="quit-btn" class="btn btn-danger pull-right">Quit Game</a>
+					<a href="index.php" id="quit-btn" class="btn btn-danger pull-right">Quit Game</a>
 				</div>
 			</div>
 
@@ -191,10 +191,6 @@ shuffle($questions);
 
 				var finishQuiz = function() {
 					clearInterval(timerInterval);
-					console.log('Quiz finished.');
-					console.log('Time taken: ' + timeTaken);
-					console.log('Time left: ' + timeLeft);
-					console.log(questionIds);
 
 					$('#quiz-screen').hide();
 					$('#finished-screen').show();
@@ -206,10 +202,11 @@ shuffle($questions);
 						timeTaken: timeTaken.getTime() / 1000,
 						token: "<?php echo $token; ?>"
 					}, function(data, status) {
-						alert(data);
 						if(data === "Success"){
 							//redirect
 							window.location.href = 'result.php';
+						} else {
+							window.location.href = 'scoreBoard.php?error=1';
 						}
 					});
 				};
@@ -231,7 +228,6 @@ shuffle($questions);
 					if (!answerEl.attr('disabled')) {
 						var answerNum = answerEl.data('number')
 						answers.push(answerNum);
-						console.log('answerNum: ' + answerNum);
 						if (questionIndex == questions.length) {
 							finishQuiz();
 						} else {
