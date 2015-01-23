@@ -129,19 +129,23 @@ if ($fb_session && $fb_user) {
 			</div>
 			<div class="row text-center">
 				<?php if ($returning_user) { ?>
-						<h3>You are currently at <mark>rank #<?php echo $user_rank; ?>.</mark></h3>
-						<?php if ($user_rank > 3) { ?>
-							<p class="lead">Keep playing to improve your score and make it to the <mark>top 3</mark> to win a prize!</p>
-						<?php } else { ?>
-							<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
-						<?php } ?>
-						<p id="share-area">
-							<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
-							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
-						</p>
+					<h3>You are currently at <mark>rank #<?php echo $user_rank; ?>.</mark></h3>
+					<?php if ($user_rank > 3) { ?>
+						<p class="lead">Keep playing to improve your score and make it to the <mark>top 3</mark> to win a prize!</p>
+					<?php } else { ?>
+						<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
+					<?php } ?>
+					<p id="share-area">
+						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
+						<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
+						<br/>
+						<span class="small">You will be asked to allow us to post to Facebook on your behalf, if you are sharing your score for the first time.</span>
+					</p>
 				<?php } else { ?>
 					<p id="share-area" style="display: none;">
 						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
+						<br/>
+						<span class="small">You will be asked to allow us to post to Facebook on your behalf, if you are sharing your score for the first time.</span>
 					</p>
 				<?php } ?>
 			</div>

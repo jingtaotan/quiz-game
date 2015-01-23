@@ -219,4 +219,6 @@ if ($fb_session) {
   }
 }
 
+var_dump($fb_session);
+
 ?>

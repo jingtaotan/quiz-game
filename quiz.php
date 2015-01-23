@@ -208,7 +208,8 @@ shuffle($questions);
 							//redirect
 							window.location.href = 'result.php';
 						} else {
-							window.location.href = 'scoreBoard.php?error=1';
+							//window.location.href = 'scoreBoard.php?error=1';
+							window.location.href = 'result.php';
 						}
 					});
 				};

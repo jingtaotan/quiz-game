@@ -40,7 +40,7 @@ require_once 'php/init.php';
                     }
                     $mysqli = getConnection();
                     $fbId = null;
-                    if (isset($fb_user)) {
+                    if (isset($fb_user) && $fb_user) {
                     		$fbId = clean($fb_user->getID(), $mysqli);
                     }
                     getScoreBoard($fbId);
