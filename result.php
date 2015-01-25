@@ -5,7 +5,7 @@ checkSession(true, "submitted");
 $beat_highscore = false;
 $user_score = $_SESSION['score'];
 $user_time = $_SESSION['timeTaken'];
-$user_rank = 3;
+$user_rank = getPosition($user_score, $user_time);
 $fb_id = "";
 
 $logged_in = false;
@@ -20,7 +20,8 @@ if ($fb_session && $fb_user) {
 		$returning_user = true;
 		$best_score = $row->user_score;
 		$best_time = $row->user_time;
-
+        
+        $user_rank = getPosition($best_score, $best_time);
 		// straightaway update the user row
 		$user_obj = $row;
 		require_once('php/insertUser.php');

@@ -127,6 +127,38 @@ function getScoreBoard($fbId) {
     $mysqli -> close();
 }
 
+/* Get position of the player based on time and score
+ ============================================= */
+function getPosition($score, $time) {
+     $position = 0;
+     $mysqli = getConnection();
+     
+      if ($stmt = $mysqli -> prepare("
+      Select Max(rowNumber) as maxRowNumber from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
+                            u.user_time, u.user_fb FROM table_user as u, (SELECT @rownr := 0) r ORDER BY user_score DESC, user_time asc
+                            ) AS alias_name
+                            where alias_name.user_score >=? and IF(alias_name.user_score = ?, IF(alias_name.user_time< ?, true, false), true);
+      "))
+      {
+          $stmt -> bind_param('iii', $score, $score, $time);
+          $stmt -> execute();
+          $stmt -> bind_result($maxRowNumber);
+          
+           /*Fetch results*/
+          while ($stmt -> fetch()) {
+              $position = $maxRowNumber+1;
+          }
+          
+          $stmt ->close();
+      }
+     
+     /* close connection*/
+     $mysqli -> close();
+     
+     //return rank postion
+     return $position;
+ }
+
 /* Get nav bar
  ============================================= */
 function getNavBar($page) {
