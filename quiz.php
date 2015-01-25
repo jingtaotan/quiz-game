@@ -206,7 +206,13 @@ shuffle($questions);
 					}, function(data, status) {
 						if(data === "Success"){
 							//redirect
-							window.location.href = 'result.php';
+							<?php 
+							 if (isset($_GET["isOffline"])) {
+							     echo "window.location.href = 'result(Offline).php'";
+                             }else{
+                                echo "window.location.href = 'result.php'";
+                             }
+							?>
 						} else {
 							window.location.href = 'scoreBoard.php?error=1';
 						}
