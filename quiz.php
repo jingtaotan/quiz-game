@@ -9,7 +9,7 @@ $_SESSION['submitted'] = null;
 session_commit();
 
 $questions = array();
-for ($difficulty = 1; $difficulty <= 3; $difficulty++) {
+for ($difficulty = 1; $difficulty <= 4; $difficulty++) {
 	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT ".LIMIT)) {
 
 		$stmt -> bind_param("s", $difficulty);
