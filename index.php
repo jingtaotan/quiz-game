@@ -9,7 +9,7 @@ require_once 'php/init.php';
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<title>Play arvato World Fact Quiz now and win!</title>
+		<title>Play arvato World Fact Challenge now and win!</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,10 +29,10 @@ require_once 'php/init.php';
 			<section class="row">
 				<div class="col-sm-6">
 					<h1 class="xl">Play now<br/>and win!</h1>
-					<h2>arvato World Fact Quiz</h2>
+					<h2>arvato World Fact Challenge</h2>
 					<p class="lead">
 						Put your knowledge of the world to the test in, and stand a chance to win
-						<span class="placeholder"><b>Parkson shopping vouchers</b> worth up to <b>RM300!</b></span>
+						<b>AEON shopping vouchers</b> worth up to <b>RM250!</b>
 					</p>
 					<p>
 						<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php">Play Now</a>
@@ -40,7 +40,7 @@ require_once 'php/init.php';
 					<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 				</div>
 				<div class="col-sm-6">
-					<img src="img/vouchers.png" alt="Vouchers" style="width: 100%;" />
+					<img src="img/vouchers.jpg" alt="Vouchers" style="width: 100%;" />
 				</div>
 			</section>
 			<section class="row">
@@ -50,7 +50,7 @@ require_once 'php/init.php';
 						<li>Click the <a href="quiz.php">Play Now</a> button.</li>
 						<li>Answer as many questions as you can correctly in 60 seconds.</li>
 						<li>Click Login to enter the competition with your Facebook account.</li>
-						<li>Play again as many times as you like to improve your score and finish in the top 3 to win prizes!</li>
+						<li>Play as many times as you like to improve your and win prizes!</li>
 					</ol>
 				</div>
 				<div class="col-sm-4">
@@ -67,11 +67,11 @@ require_once 'php/init.php';
 			<section class="row">
 				<div class="col-sm-6">
 					<h2>Prizes</h2>
-					<p>There are 3 prizes up for grabs for the top 3 contestants:</p>
+					<p>There are 5 prizes up for grabs for the top 5 participants:</p>
 					<ul>
-						<li><b>First prize:</b> <span class="placeholder">1 x RM300 Parkson shopping voucher</span></li>
-						<li><b>1st runner-up:</b> <span class="placeholder">1 x RM200 Parkson shopping voucher</span></li>
-						<li><b>2nd runner-up:</b> <span class="placeholder">	1 x RM100 Parkson shopping voucher</span></li>
+						<li><b>1st prize:</b> RM250 worth of AEON shopping vouchers</span></li>
+						<li><b>2nd prize:</b> RM100 worth of AEON shopping vouchers</span></li>
+						<li><b>3rd, 4th and 5th prizes:</b> RM50 worth of AEON shopping vouchers each</span></li>
 					</ul>
 				</div>
 				<div class="col-sm-6">
@@ -83,7 +83,7 @@ require_once 'php/init.php';
 					<p>
 						<b>Date:</b> 7 - 8 February 2015
 						<br>
-						<b>Time:</b> 11:00AM - 6:00PM
+						<b>Time:</b> 11:00AM - 5:00PM
 						<br>
 						<b>Venue:</b> Kuala Lumpur Convention Centre, Halls 4-6 (free admission)
 					</p>
@@ -91,6 +91,8 @@ require_once 'php/init.php';
 				</div>
 			</section>
 		</div>
+
+		<?php getFooter() ?>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

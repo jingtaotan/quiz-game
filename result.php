@@ -20,7 +20,7 @@ if ($fb_session && $fb_user) {
 		$returning_user = true;
 		$best_score = $row->user_score;
 		$best_time = $row->user_time;
-        
+
         $user_rank = getPosition($best_score, $best_time);
 		// straightaway update the user row
 		$user_obj = $row;
@@ -36,7 +36,7 @@ if ($fb_session && $fb_user) {
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<title>Results - arvato World Fact Quiz</title>
+		<title>Results - arvato World Fact Challenge</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -152,6 +152,8 @@ if ($fb_session && $fb_user) {
 			</div>
 		</div>
 
+		<?php getFooter() ?>
+
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -224,7 +226,7 @@ if ($fb_session && $fb_user) {
 						"/me/feed",
 						"POST",
 						{
-							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Quiz! Can you beat my score?",
+							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Challenge! Can you beat my score?",
 							link: "http://quiz.arvato-systems.asia/",
 							actions: [{
 								name: "Play Now",

@@ -9,7 +9,7 @@ require_once 'php/init.php';
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<title>Scoreboard - arvato World Fact Quiz</title>
+		<title>Scoreboard - arvato World Fact Challenge</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,9 +43,6 @@ require_once 'php/init.php';
                     if (isset($fb_user) && $fb_user) {
                     		$fbId = clean($fb_user->getID(), $mysqli);
                     }
-                    else if (isset($fb_user)) {
-                        $fbId = clean($fb_user->getID(), $mysqli);
-                    }
                     getScoreBoard($fbId);
                     $mysqli->close();
 					?>
@@ -53,6 +50,8 @@ require_once 'php/init.php';
 				</div>
 			</div>
 		</div>
+
+		<?php getFooter() ?>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
