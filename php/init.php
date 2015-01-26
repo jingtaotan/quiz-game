@@ -132,7 +132,7 @@ function getScoreBoard($fbId) {
 function getPosition($score, $time) {
      $position = 0;
      $mysqli = getConnection();
-     
+
       if ($stmt = $mysqli -> prepare("
       Select Max(rowNumber) as maxRowNumber from (SELECT  @rownr:=@rownr+1 AS rowNumber, u.user_name, u.user_score,
                             u.user_time, u.user_fb FROM table_user as u, (SELECT @rownr := 0) r ORDER BY user_score DESC, user_time asc
@@ -143,18 +143,18 @@ function getPosition($score, $time) {
           $stmt -> bind_param('iii', $score, $score, $time);
           $stmt -> execute();
           $stmt -> bind_result($maxRowNumber);
-          
+
            /*Fetch results*/
           while ($stmt -> fetch()) {
               $position = $maxRowNumber+1;
           }
-          
+
           $stmt ->close();
       }
-     
+
      /* close connection*/
      $mysqli -> close();
-     
+
      //return rank postion
      return $position;
  }
@@ -184,7 +184,7 @@ function getNavBar($page) {
                                 <a href="quiz.php">Play Now</a>
                             </li>
                             <li ' . ($page == 'about' ? 'class="active"' : '') . '>
-                                <a href="about.php">About Arvato</a>
+                                <a href="about.php">About arvato</a>
                             </li>
                             <li ' . ($page == 'scoreBoard' ? 'class="active"' : '') . '>
                                 <a href="scoreBoard.php">ScoreBoard</a>
@@ -193,6 +193,16 @@ function getNavBar($page) {
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>';
+}
+
+function getFooter() {
+  echo '
+  <footer>
+  <div class="container">
+  <hr/>
+  <p class="text-muted"><a href="terms.pdf" target="_blank">Terms and Conditions</a> | <a href="privacy.pdf" target="_blank">Privacy Policy</a></p>
+  </div>
+  </footer>';
 }
 
 /* Include Facebook SDK for PHP
@@ -250,5 +260,4 @@ if ($fb_session) {
     error_log($e);
   }
 }
-
 ?>

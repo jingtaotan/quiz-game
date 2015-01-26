@@ -75,19 +75,17 @@ if (isset($user_obj) || isset($_POST["token"])) {
     /* close connection*/
     $mysqli -> close();
 
-/*
     $_SESSION["score"] = null;
     $_SESSION["timeTaken"] = null;
     $_SESSION['submitted'] = null;
     $_SESSION["token"] = null;
     $_SESSION["played"] = null;
-    */ 
 
     if (!isset($user_obj)) {
       if ( isset($require_from_root) && $require_from_root ) {
-        header("Location: scoreBoard.php?played=true&fbId=$user_fb");
+        header("Location: scoreBoard.php?played=true");
       } else {
-        header("Location: ../scoreBoard.php?played=true&fbId=$user_fb");
+        header("Location: ../scoreBoard.php?played=true");
       }
     }
 

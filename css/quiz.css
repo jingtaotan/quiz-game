@@ -26,6 +26,17 @@ section.alternate {
 #play-now-btn {
   font-size: 3em;
 }
+#contact-panel {
+  float: none;
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #contact-panel {
+    float: right;
+    width: 50%;
+    margin: 0 0 1em 2em;
+  }
+}
 
 /* Result page */
 .btn {

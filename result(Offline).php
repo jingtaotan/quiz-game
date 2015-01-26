@@ -22,7 +22,7 @@ $returning_user = false;
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<title>Results - arvato World Fact Quiz</title>
+		<title>Results - arvato World Fact Challenge</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -89,6 +89,8 @@ $returning_user = false;
 				</div>
 			</div>
 		</div>
+
+		<?php getFooter() ?>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
