@@ -43,6 +43,9 @@ require_once 'php/init.php';
                     if (isset($fb_user) && $fb_user) {
                     		$fbId = clean($fb_user->getID(), $mysqli);
                     }
+                    else if (isset($fb_user)) {
+                        $fbId = clean($fb_user->getID(), $mysqli);
+                    }
                     getScoreBoard($fbId);
                     $mysqli->close();
 					?>

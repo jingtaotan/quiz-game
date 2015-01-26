@@ -9,7 +9,7 @@ $_SESSION['submitted'] = null;
 session_commit();
 
 $questions = array();
-for ($difficulty = 1; $difficulty <= 3; $difficulty++) {
+for ($difficulty = 1; $difficulty <= 4; $difficulty++) {
 	if ($stmt = $mysqli -> prepare("SELECT * FROM table_question WHERE question_difficulty=? ORDER BY RAND() LIMIT ".LIMIT)) {
 
 		$stmt -> bind_param("s", $difficulty);
@@ -206,7 +206,13 @@ shuffle($questions);
 					}, function(data, status) {
 						if(data === "Success"){
 							//redirect
-							window.location.href = 'result.php';
+							<?php 
+							 if (isset($_GET["isOffline"])) {
+							     echo "window.location.href = 'result(Offline).php'";
+                             }else{
+                                echo "window.location.href = 'result.php'";
+                             }
+							?>
 						} else {
 							//window.location.href = 'scoreBoard.php?error=1';
 							window.location.href = 'result.php';
