@@ -20,7 +20,7 @@ if ($fb_session && $fb_user) {
 		$returning_user = true;
 		$best_score = $row->user_score;
 		$best_time = $row->user_time;
-
+        
         $user_rank = getPosition($best_score, $best_time);
 		// straightaway update the user row
 		$user_obj = $row;
@@ -36,7 +36,7 @@ if ($fb_session && $fb_user) {
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-		<title>Results - arvato World Fact Challenge</title>
+		<title>Results - arvato World Fact Quiz</title>
 
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -106,7 +106,7 @@ if ($fb_session && $fb_user) {
 						<div id="logged-in">
 							<p>Enter your details here to stand a chance to WIN!</p>
 							<form id="register-form" action="php/insertUser.php" method="post">
-                                <div class="form-group">
+								<div class="form-group">
                                     <label for="inputName">Name <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
                                     <span class="childHidden">Please do not leave this empty</span>
@@ -122,42 +122,35 @@ if ($fb_session && $fb_user) {
                                     <span class="childHidden">Please do not leave this empty<br /></span>
                                     <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-default">
-                                    Submit
-                                </button>
-                                <input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
-                                <input type="hidden" name="inputFbuserid" value="<?php echo $fb_id; ?>"/>
-                            </form>
+								<button type="submit" class="btn btn-default">
+									Submit
+								</button>
+								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
+								<input type="hidden" name="inputFbuserid" value=""/>
+							</form>
 						</div>
 					<?php } ?>
 				</div>
 			</div>
 			<div class="row text-center">
 				<?php if ($returning_user) { ?>
-					<h3>You are currently at <mark>rank #<?php echo $user_rank; ?>.</mark></h3>
-					<?php if ($user_rank > 3) { ?>
-						<p class="lead">Keep playing to improve your score and make it to the <mark>top 3</mark> to win a prize!</p>
-					<?php } else { ?>
-						<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
-					<?php } ?>
-					<p id="share-area">
-						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
-						<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
-						<br/>
-						<span class="small">You will be asked to allow us to post to Facebook on your behalf, if you are sharing your score for the first time.</span>
-					</p>
+						<h3>You are currently at <mark>rank #<?php echo $user_rank; ?>.</mark></h3>
+						<?php if ($user_rank > 3) { ?>
+							<p class="lead">Keep playing to improve your score and make it to the <mark>top 3</mark> to win a prize!</p>
+						<?php } else { ?>
+							<p class="lead">Good job, but don't stop now!<br/> Keep playing to maintain your position and win a prize!</p>
+						<?php } ?>
+						<p id="share-area">
+							<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
+							<a class="btn btn-primary btn-lg" href="scoreBoard.php?played=true">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
+						</p>
 				<?php } else { ?>
 					<p id="share-area" style="display: none;">
 						<button class="btn btn-share btn-lg" href="#" id="share-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Share on Facebook</button>
-						<br/>
-						<span class="small">You will be asked to allow us to post to Facebook on your behalf, if you are sharing your score for the first time.</span>
 					</p>
 				<?php } ?>
 			</div>
 		</div>
-
-		<?php getFooter() ?>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -261,23 +254,22 @@ if ($fb_session && $fb_user) {
 						"/me/feed",
 						"POST",
 						{
-							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Challenge! Can you beat my score?",
-							link: "http://quiz.arvato-systems.asia/",
+							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Quiz! Can you beat my score?",
+							link: "http://quiz.arvato-systems.asia/quiz/",
 							actions: [{
 								name: "Play Now",
-								link: "http://quiz.arvato-systems.asia/"
+								link: "http://quiz.arvato-systems.asia/quiz/"
 							}]
 						},
 						function (response) {
 							if (response && !response.error) {
-								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!');
+								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
 							} else {
 								if ( response.error.code == 200 ) {
 									alert('You need to grant us permission to post to Facebook for you. Click Share to try again.')
 								} else {
 									alert('Oops! Something seems to have went wrong when sharing to Facebook. Try again later.');
 								}
-								$('#share-btn').removeAttr('disabled');
 							}
 						}
 					);
@@ -314,9 +306,7 @@ if ($fb_session && $fb_user) {
 						}, {scope: 'public_profile,email'});
 					});
 
-					var shareBtn = $('#share-btn')
-					shareBtn.on('click', function() {
-						shareBtn.attr('disabled', '');
+					$('#share-btn').on('click', function() {
 						if (appCanPublish) {
 							publishStory();
 						} else {
@@ -326,7 +316,6 @@ if ($fb_session && $fb_user) {
 										publishStory();
 									} else {
 										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
-										shareBtn.removeAttr('disabled');
 									}
 								});
 							}, {scope: 'publish_actions', auth_type: 'rerequest'});
