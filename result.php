@@ -105,25 +105,30 @@ if ($fb_session && $fb_user) {
 						</div>
 						<div id="logged-in">
 							<p>Enter your details here to stand a chance to WIN!</p>
-							<form action="php/insertUser.php" method="post">
-								<div class="form-group">
-									<label for="inputName">Name</label>
-									<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
-								</div>
-								<div class="form-group">
-									<label for="inputEmail">Email address</label>
-									<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
-								</div>
-								<div class="form-group">
-									<label for="inputPhone">Phone Number</label>
-									<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-								</div>
-								<button type="submit" class="btn btn-default">
-									Submit
-								</button>
-								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
-								<input type="hidden" name="inputFbuserid" value=""/>
-							</form>
+							<form id="register-form" action="php/insertUser.php" method="post">
+                                <div class="form-group">
+                                    <label for="inputName">Name <span class="red" >*</span></label>
+                                    <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
+                                    <span class="childHidden">Please do not leave this empty</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Email address <span class="red" >*</span></label>
+                                    <input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
+                                    <span class="childHidden">Please do not leave this empty</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPhone">Phone Number <span class="red" >*</span></label>
+                                    <input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
+                                    <span class="childHidden">Please do not leave this empty<br /></span>
+                                    <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-default">
+                                    Submit
+                                </button>
+                                <input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
+                                <input type="hidden" name="inputFbuserid" value="<?php echo $fb_id; ?>"/>
+                            </form>
 						</div>
 					<?php } ?>
 				</div>
@@ -153,10 +158,40 @@ if ($fb_session && $fb_user) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<script>
+		
+		   //Validation
+            $("#register-form").submit(function(){
+                var isFormValid = true;
+            
+                $( ".required" ).each(function( index ) {
+                    if ($.trim($(this).val()).length == 0){
+                    
+                        $(this).addClass("highlight");
+                        isFormValid = false;
+                        $(this).next('.childHidden').show();
+                    }
+                    else{
+                        $(this).removeClass("highlight");
+                        $(this).next('.childHidden').hide();
+                    }
+                });
+                    
+                if($.trim($('#inputPhone').val()).length != 10){
+                    $('#inputPhone').addClass("highlight");
+                    $('#inputPhone').next('.childHidden').next('.childHidden').show();
+                    isFormValid = false;
+                }else{
+                    $('#inputPhone').removeClass("highlight");
+                    $('#inputPhone').next('.childHidden').next('.childHidden').hide();
+                }
+            
+                return isFormValid;
+            });
+            
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 
 			var appCanPublish = false;
-
+            
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				// The response object is returned with a status field that lets the

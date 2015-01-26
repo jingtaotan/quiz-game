@@ -61,19 +61,24 @@ $returning_user = false;
 				<div class="col-sm-6">
 						<div id="Form">
 							<p>Enter your details here to stand a chance to WIN!</p>
-							<form action="php/insertUser.php" method="post">
+							<form id="register-form" action="php/insertUser.php" method="post">
 								<div class="form-group">
-									<label for="inputName">Name</label>
-									<input type="text" class="form-control" name="inputName" id="inputName" placeholder="Enter your name">
+									<label for="inputName">Name <span class="red" >*</span></label>
+									<input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
+								    <span class="childHidden">Please do not leave this empty</span>
 								</div>
 								<div class="form-group">
-									<label for="inputEmail">Email address</label>
-									<input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter email">
+									<label for="inputEmail">Email address <span class="red" >*</span></label>
+									<input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
+								    <span class="childHidden">Please do not leave this empty</span>
 								</div>
 								<div class="form-group">
-									<label for="inputPhone">Phone Number</label>
-									<input type="text" class="form-control" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
+									<label for="inputPhone">Phone Number <span class="red" >*</span></label>
+									<input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
+								    <span class="childHidden">Please do not leave this empty<br /></span>
+								    <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
 								</div>
+								
 								<button type="submit" class="btn btn-default">
 									Submit
 								</button>
@@ -89,6 +94,36 @@ $returning_user = false;
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
+		<script>
+		    //Validation
+            $("#register-form").submit(function(){
+                var isFormValid = true;
+            
+                $( ".required" ).each(function( index ) {
+                    if ($.trim($(this).val()).length == 0){
+                    
+                        $(this).addClass("highlight");
+                        isFormValid = false;
+                        $(this).next('.childHidden').show();
+                    }
+                    else{
+                        $(this).removeClass("highlight");
+                        $(this).next('.childHidden').hide();
+                    }
+                });
+                    
+                if($.trim($('#inputPhone').val()).length != 10){
+                    $('#inputPhone').addClass("highlight");
+                    $('#inputPhone').next('.childHidden').next('.childHidden').show();
+                    isFormValid = false;
+                }else{
+                    $('#inputPhone').removeClass("highlight");
+                    $('#inputPhone').next('.childHidden').next('.childHidden').hide();
+                }
+            
+                return isFormValid;
+            });
+		</script>
 		</body>
 </html>
 <?php session_commit(); ?>

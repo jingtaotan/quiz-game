@@ -108,7 +108,18 @@ span.score s {
 }
 
 
-/*Hidding elements*/
+/*Hide elements*/
 .childHidden{
     display: none;
+}
+
+/*highlight validation*/
+.highlight{
+	box-shadow: 0 0 5px rgb(255,0,0);
+	border: 1px solid rgb(255,0,0);
+	
+}
+
+.red{
+	color:red;
 }
