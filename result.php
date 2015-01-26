@@ -109,18 +109,18 @@ if ($fb_session && $fb_user) {
 								<div class="form-group">
                                     <label for="inputName">Name <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">*Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">Email address <span class="red" >*</span></label>
                                     <input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">*Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPhone">Phone Number <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-                                    <span class="childHidden">Please do not leave this empty<br /></span>
-                                    <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
+                                    <span class="childHidden">*Please do not leave this empty<br /></span>
+                                    <span class="childHidden phone">*Please make sure it is a valid number (example: 01XXXXXXXX) </span>
                                 </div>
 								<button type="submit" class="btn btn-default">
 									Submit
