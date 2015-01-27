@@ -18,12 +18,14 @@ function getConnection() {
 
     /* connect to database
      * Params: ip, username, password, dbName*/
-    return $mysqli = new mysqli(
-      $config->db_host,
-      $config->db_username,
-      $config->db_password,
-      $config->db_name
-    );
+     $mysqli = new mysqli(
+       $config->db_host,
+       $config->db_username,
+       $config->db_password,
+       $config->db_name
+     );
+   $mysqli->set_charset('utf8');
+   return $mysqli;
 }
 
 /* Prevents SQL injection but does not prevents XSS
