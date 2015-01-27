@@ -277,9 +277,7 @@ if ($fb_session && $fb_user) {
 						method: 'share',
 						href: 'http://quiz.arvato-systems.asia',
 					}, function(response){
-						if ( response && !response.error ) {
-							$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
-						}
+						// do nothing
 					});
 				};
 
