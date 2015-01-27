@@ -15,7 +15,7 @@ require_once 'php/init.php';
 		and stand a chance to win AEON shopping vouchers worth up to RM250!
 		A total of RM500 worth of AEON shopping vouchers are up for grabs for 5 lucky winners." />
 		<meta property="fb:app_id" content="<?php echo $config->fb_appid;?>" />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content="article" />
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 		<title>Play arvato World Fact Challenge now and win!</title>
