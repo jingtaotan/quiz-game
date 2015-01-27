@@ -189,7 +189,7 @@ function getNavBar($page) {
                                 <a href="about.php">About arvato</a>
                             </li>
                             <li ' . ($page == 'scoreBoard' ? 'class="active"' : '') . '>
-                                <a href="scoreBoard.php">ScoreBoard</a>
+                                <a href="scoreBoard.php">Scoreboard</a>
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
