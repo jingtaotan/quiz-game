@@ -190,8 +190,6 @@ if ($fb_session && $fb_user) {
 
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 
-			var appCanPublish = false;
-
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				// The response object is returned with a status field that lets the
@@ -251,51 +249,15 @@ if ($fb_session && $fb_user) {
 				FB.getLoginStatus(statusChangeCallback);
 
 				var publishStory = function() {
-					FB.api(
-						"/me/feed",
-						"POST",
-						{
-							message: "I got a score of <?php echo $user_score; ?> on the arvato World Fact Quiz! Can you beat my score?",
-							link: "http://quiz.arvato-systems.asia/quiz/",
-							actions: [{
-								name: "Play Now",
-								link: "http://quiz.arvato-systems.asia/quiz/"
-							}]
-						},
-						function (response) {
-							if (response && !response.error) {
-								$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
-							} else {
-								if ( response.error.code == 200 ) {
-									alert('You need to grant us permission to post to Facebook for you. Click Share to try again.')
-								} else {
-									alert('Oops! Something seems to have went wrong when sharing to Facebook. Try again later.');
-								}
-							}
+					FB.ui({
+						method: 'share',
+						href: 'http://quiz.arvato-systems.asia',
+					}, function(response){
+						if ( response && !response.error ) {
+							$('#share-btn').html('<span class="glyphicon glyphicon-ok"></span> Shared to Facebook!').attr('disabled', '');
 						}
-					);
-				};
-
-				var checkPermission = function(callback) {
-					FB.api('/me/permissions', function(response) {
-						var canPublish = false;
-						var perms = response.data;
-						var i = 0;
-						for ( i = 0 ; i < perms.length ; i++) {
-							var perm = perms[i];
-							if ( perm.permission != 'publish_actions' ) {
-								continue;
-							}
-							if ( perm.status == 'granted' ) {
-								canPublish = true;
-							}
-						}
-						callback.call(this, canPublish);
 					});
 				};
-				checkPermission(function(result) {
-					appCanPublish = result;
-				});
 
 				$(document).ready(function() {
 					$('#login-btn').on('click', function() {
@@ -307,21 +269,7 @@ if ($fb_session && $fb_user) {
 						}, {scope: 'public_profile,email'});
 					});
 
-					$('#share-btn').on('click', function() {
-						if (appCanPublish) {
-							publishStory();
-						} else {
-							FB.login(function(response) {
-								checkPermission(function(appCanPublish) {
-									if (appCanPublish) {
-										publishStory();
-									} else {
-										alert('You need to grant us permission to post to Facebook for you. Click Share to try again.');
-									}
-								});
-							}, {scope: 'publish_actions', auth_type: 'rerequest'});
-						}
-					});
+					$('#share-btn').on('click', publishStory);
 				});
 
 			};
