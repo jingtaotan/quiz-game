@@ -37,6 +37,13 @@ require_once 'php/init.php';
                                 <strong>Message:</strong> Thank you for participating in our quiz!<br />
                                 <a href="quiz.php">Click here to play again</a>
                             </div>';
+                    }else if(isset($_GET["ended"])){
+                        echo '<div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Message:</strong> Sorry, the quiz challenge has already ended.<br />
+                            </div>';
                     }
                     $mysqli = getConnection();
                     $fbId = null;

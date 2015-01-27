@@ -1,6 +1,15 @@
 <?php
 require_once 'php/init.php';
 
+//Check Date
+$endDate = '2015-02-08 23:59:59';
+date_default_timezone_set('Asia/Kuala_Lumpur');
+$date = date('Y-m-d H:i:s');
+
+if($date > $endDate){
+    header("Location: scoreBoard.php?ended=true");
+}
+
 $mysqli = getConnection();
 
 $token =bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM));
