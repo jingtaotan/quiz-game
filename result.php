@@ -20,7 +20,7 @@ if ($fb_session && $fb_user) {
 		$returning_user = true;
 		$best_score = $row->user_score;
 		$best_time = $row->user_time;
-        
+
         $user_rank = getPosition($best_score, $best_time);
 		// straightaway update the user row
 		$user_obj = $row;
@@ -34,6 +34,7 @@ if ($fb_session && $fb_user) {
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<?php getOgTags(); ?>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 		<title>Results - arvato World Fact Quiz</title>
@@ -157,14 +158,14 @@ if ($fb_session && $fb_user) {
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 		<script>
-		
+
 		   //Validation
             $("#register-form").submit(function(){
                 var isFormValid = true;
-            
+
                 $( ".required" ).each(function( index ) {
                     if ($.trim($(this).val()).length == 0){
-                    
+
                         $(this).addClass("highlight");
                         isFormValid = false;
                         $(this).next('.childHidden').show();
@@ -174,7 +175,7 @@ if ($fb_session && $fb_user) {
                         $(this).next('.childHidden').hide();
                     }
                 });
-                    
+
                 if($.trim($('#inputPhone').val()).length != 10){
                     $('#inputPhone').addClass("highlight");
                     $('#inputPhone').next('.childHidden').next('.childHidden').show();
@@ -183,14 +184,14 @@ if ($fb_session && $fb_user) {
                     $('#inputPhone').removeClass("highlight");
                     $('#inputPhone').next('.childHidden').next('.childHidden').hide();
                 }
-            
+
                 return isFormValid;
             });
-            
+
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 
 			var appCanPublish = false;
-            
+
 			// This is called with the results from from FB.getLoginStatus().
 			function statusChangeCallback(response) {
 				// The response object is returned with a status field that lets the

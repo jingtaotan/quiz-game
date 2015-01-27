@@ -7,15 +7,7 @@ require_once 'php/init.php';
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta property="og:title" content="Play now and win shopping vouchers!" />
-		<meta property="og:site_name" content="arvato World Fact Challenge"/>
-		<meta property="og:url" content="http://quiz.arvato-systems.asia" />
-		<meta property="og:image" content="http://quiz.arvato-systems.asia/img/og-image.jpg" />
-		<meta property="og:description" content="Put your knowledge of the world to the test in,
-		and stand a chance to win AEON shopping vouchers worth up to RM250!
-		A total of RM500 worth of AEON shopping vouchers are up for grabs for 5 lucky winners." />
-		<meta property="fb:app_id" content="<?php echo $config->fb_appid;?>" />
-		<meta property="og:type" content="article" />
+		<?php getOgTags(); ?>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 		<title>Play arvato World Fact Challenge now and win!</title>
