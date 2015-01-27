@@ -101,6 +101,7 @@ shuffle($questions);
 
 			<div id="finished-screen">
 				<h1>Quiz finished!</h1>
+        <p class="lead">Please wait while we check your answers...</p>
 			</div>
 
 		</div>

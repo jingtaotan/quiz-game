@@ -23,6 +23,7 @@ if (isset($user_obj) || isset($_POST["token"])) {
     $user_phone = clean($_POST["inputPhone"], $mysqli);
     $user_fb = clean($_POST["inputFbuserid"], $mysqli);
     $token = clean($_POST["token"], $mysqli);
+    $user_contact = clean($_POST['inputContact'], $mysqli);
   }
 
   if ($token == $_SESSION["token"]) {
@@ -58,8 +59,8 @@ if (isset($user_obj) || isset($_POST["token"])) {
 
     } else {
       // Insert
-      $stmt = $mysqli -> prepare("INSERT INTO table_user VALUES (?, ?, ?, ?, ?, ?, ?)");
-      $stmt -> bind_param('isssssd', $id, $user_name, $user_email, $user_phone, $user_fb, $user_score, $user_time);
+      $stmt = $mysqli -> prepare("INSERT INTO table_user VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt -> bind_param('isssssdi', $id, $user_name, $user_email, $user_phone, $user_fb, $user_score, $user_time, $user_contact);
 
       $stmt -> execute();
 

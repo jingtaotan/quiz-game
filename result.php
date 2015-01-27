@@ -98,31 +98,45 @@ if ($fb_session && $fb_user) {
 						<?php } ?>
 					<?php } else { ?>
 						<div id="loading">
-							Loading...
+							<h2>Loading...</h2>
 						</div>
 						<div id="not-logged-in">
 							<p>Log in with your Facebook account now to enter the competition, and stand a chance to WIN!</p>
 							<button class="btn btn-share btn-lg" id="login-btn"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Log in with Facebook</button>
 						</div>
 						<div id="logged-in">
-							<p>Enter your details here to stand a chance to WIN!</p>
+							<p class="lead">Enter your details here to stand a chance to WIN!</p>
+							<p>Please enter your details correctly - if you win a prize and we cannot contact you, you may be disqualified.</p>
 							<form id="register-form" action="php/insertUser.php" method="post">
 								<div class="form-group">
-                                    <label for="inputName">Name <span class="red" >*</span></label>
-                                    <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
-                                    <span class="childHidden">*Please do not leave this empty</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail">Email address <span class="red" >*</span></label>
-                                    <input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
-                                    <span class="childHidden">*Please do not leave this empty</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPhone">Phone Number <span class="red" >*</span></label>
-                                    <input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-                                    <span class="childHidden">*Please do not leave this empty<br /></span>
-                                    <span class="childHidden phone">*Please make sure it is a valid number (example: 01XXXXXXXX) </span>
-                                </div>
+                    <label for="inputName">Name <span class="red" >*</span></label>
+                    <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
+                    <span class="childHidden">* This is a required field</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email address <span class="red" >*</span></label>
+                    <input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
+                    <span class="childHidden">* This is a required field</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone">Phone Number <span class="red" >*</span></label>
+                    <input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="e.g. 0123456789">
+                    <span class="childHidden">* This is a required field<br /></span>
+                    <span class="childHidden phone">* Enter 10 or 11 digit phone number with area code, no spaces and hyphens</span>
+                </div>
+								<div class="form-group checkbox">
+									<label id="labelAgree">
+										<input type="checkbox" name="inputAgree" id="inputAgree"><span class="red" >*</span> By entering the contest, I agree to the <a href="terms.pdf" target="_blank">Terms and Conditions</a>
+									</label>
+									<br/>
+									<span class="childHidden" id="messageAgree">* You must agree to the Terms and Conditions to enter the contest<br /></span>
+								</div>
+								<div class="form-group checkbox">
+									<label>
+										<input type="hidden" name="inputContact" value="0" />
+										<input type="checkbox" name="inputContact" id="inputContact" value="1"> Yes! Please contact me about job opportunities at arvato IT Solutions Malaysia
+									</label>
+								</div>
 								<button type="submit" class="btn btn-default">
 									Submit
 								</button>
@@ -159,34 +173,44 @@ if ($fb_session && $fb_user) {
 		<script src="js/bootstrap.min.js"></script>
 		<script>
 
-		   //Validation
-            $("#register-form").submit(function(){
-                var isFormValid = true;
+ 			var inputPhone = $('#inputPhone');
+      $("#register-form").submit(function(){
+          var isFormValid = true;
 
-                $( ".required" ).each(function( index ) {
-                    if ($.trim($(this).val()).length == 0){
+          $( ".required" ).each(function( index ) {
+              if ($.trim($(this).val()).length == 0){
 
-                        $(this).addClass("highlight");
-                        isFormValid = false;
-                        $(this).next('.childHidden').show();
-                    }
-                    else{
-                        $(this).removeClass("highlight");
-                        $(this).next('.childHidden').hide();
-                    }
-                });
+                  $(this).addClass("highlight");
+                  isFormValid = false;
+                  $(this).next('.childHidden').show();
+              }
+              else{
+                  $(this).removeClass("highlight");
+                  $(this).next('.childHidden').hide();
+              }
+          });
 
-                if($.trim($('#inputPhone').val()).length != 10){
-                    $('#inputPhone').addClass("highlight");
-                    $('#inputPhone').next('.childHidden').next('.childHidden').show();
-                    isFormValid = false;
-                }else{
-                    $('#inputPhone').removeClass("highlight");
-                    $('#inputPhone').next('.childHidden').next('.childHidden').hide();
-                }
+					var trimmedLength = $.trim(inputPhone.val()).length;
+          if(trimmedLength != 10 && trimmedLength != 11) { // there are 10 and 11 digit phone numbers
+              inputPhone.addClass("highlight");
+              inputPhone.next('.childHidden').next('.childHidden').show();
+              isFormValid = false;
+          }else{
+              inputPhone.removeClass("highlight");
+              inputPhone.next('.childHidden').next('.childHidden').hide();
+          }
 
-                return isFormValid;
-            });
+					if ( !$('#inputAgree').is(':checked') ) {
+						$('#messageAgree').show();
+						$('#labelAgree').addClass('red');
+						isFormValid = false;
+					} else {
+						$('#messageAgree').hide();
+						$('#labelAgree').removeClass('red');
+					}
+
+          return isFormValid;
+      });
 
 			var returningUser = <?php echo $returning_user ? 'true' : 'false'; ?>;
 
