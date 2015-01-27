@@ -205,6 +205,21 @@ function getFooter() {
   </footer>';
 }
 
+function getOgTags() {
+  global $config;
+  echo '
+  <meta property="og:title" content="Play now and win shopping vouchers!" />
+  <meta property="og:site_name" content="arvato World Fact Challenge"/>
+  <meta property="og:url" content="http://quiz.arvato-systems.asia" />
+  <meta property="og:image" content="http://quiz.arvato-systems.asia/img/og-image.jpg" />
+  <meta property="og:description" content="Put your knowledge of the world to the test in,
+  and stand a chance to win AEON shopping vouchers worth up to RM250!
+  A total of RM500 worth of AEON shopping vouchers are up for grabs for 5 lucky winners." />
+  <meta property="fb:app_id" content="' . $config->fb_appid . '" />
+  <meta property="og:type" content="article" />
+  ';
+}
+
 /* Include Facebook SDK for PHP
  ============================================= */
 define('FACEBOOK_SDK_V4_SRC_DIR', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'Facebook' . DIRECTORY_SEPARATOR);

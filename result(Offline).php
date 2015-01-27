@@ -20,6 +20,7 @@ $returning_user = false;
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<?php getOgTags(); ?>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 		<title>Results - arvato World Fact Challenge</title>
@@ -78,7 +79,7 @@ $returning_user = false;
 								    <span class="childHidden">Please do not leave this empty<br /></span>
 								    <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
 								</div>
-								
+
 								<button type="submit" class="btn btn-default">
 									Submit
 								</button>
@@ -100,10 +101,10 @@ $returning_user = false;
 		    //Validation
             $("#register-form").submit(function(){
                 var isFormValid = true;
-            
+
                 $( ".required" ).each(function( index ) {
                     if ($.trim($(this).val()).length == 0){
-                    
+
                         $(this).addClass("highlight");
                         isFormValid = false;
                         $(this).next('.childHidden').show();
@@ -113,7 +114,7 @@ $returning_user = false;
                         $(this).next('.childHidden').hide();
                     }
                 });
-                    
+
                 if($.trim($('#inputPhone').val()).length != 10){
                     $('#inputPhone').addClass("highlight");
                     $('#inputPhone').next('.childHidden').next('.childHidden').show();
@@ -122,7 +123,7 @@ $returning_user = false;
                     $('#inputPhone').removeClass("highlight");
                     $('#inputPhone').next('.childHidden').next('.childHidden').hide();
                 }
-            
+
                 return isFormValid;
             });
 		</script>
