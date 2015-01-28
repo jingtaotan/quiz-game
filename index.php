@@ -84,9 +84,9 @@ require_once 'php/init.php';
 					<p>
 						<b>Date:</b> 7 - 8 February 2015
 						<br>
-						<b>Time:</b> 11:00AM - 5:00PM
+						<b>Time:</b> 11:00AM - 6:00PM
 						<br>
-						<b>Venue:</b> Kuala Lumpur Convention Centre, Halls 4-6 (free admission)
+						<b>Venue:</b> Kuala Lumpur Convention Centre, Hall 4 (free admission)
 					</p>
 					<a href="http://careersandstudy.com/">Find out more about JobsCentral Career Fair</a>
 				</div>
