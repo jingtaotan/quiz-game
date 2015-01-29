@@ -53,6 +53,12 @@ if (isset($user_obj) || isset($_POST["token"])) {
         $stmt->execute();
         error_log('insertUser: updated user row, user_fb = ' . $user_fb);
         error_log(sprintf("%d Row inserted.\n", $stmt->affected_rows));
+        
+        if($stmt->affected_rows < 1){
+            error_log("SQL error: ".$stmt->error);
+        }
+        
+        $stmt -> close();
       } else {
         error_log('insertUser: not updating user row');
       }
