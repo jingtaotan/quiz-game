@@ -13,8 +13,6 @@ if (isset($_POST["token"])) {
     $remark = clean($_POST["inputRemark"], $mysqli);
     $interest = clean($_POST["inputInterest"], $mysqli);
     $status = clean($_POST["inputStatus"], $mysqli);
-    
-    echo $status;
 
     $stmt = $mysqli -> prepare("INSERT INTO table_register VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt -> bind_param('sississs', $name, $id, $phone, $email, $age, $status, $interest, $remark);

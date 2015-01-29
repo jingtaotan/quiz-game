@@ -54,7 +54,7 @@ function getScoreBoard($fbId) {
     $count = 0;
     $isTop = false;
 
-    if ($stmt = $mysqli -> prepare("SELECT user_name, user_score, user_time, user_fb FROM table_user ORDER BY user_score DESC, user_time asc LIMIT 10")) {
+    if ($stmt = $mysqli -> prepare("SELECT user_name, user_score, user_time, user_fb FROM table_user group by user_fb ORDER BY user_score DESC, user_time asc LIMIT 10")) {
 
         $stmt -> execute();
         $stmt -> bind_result($user_name, $user_score, $user_time, $user_fb);
