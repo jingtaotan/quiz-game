@@ -2,6 +2,8 @@
 require_once 'php/init.php';
 checkSession(true, "submitted");
 
+game_log('User entered result page');
+
 $beat_highscore = false;
 $user_score = $_SESSION['score'];
 $user_time = $_SESSION['timeTaken'];
@@ -11,21 +13,34 @@ $fb_id = "";
 $logged_in = false;
 $returning_user = false;
 if ($fb_session && $fb_user) {
+	game_log('User is logged in');
 	$logged_in = true;
 	$mysqli = getConnection();
-    $fb_id = clean($fb_user->getId(), $mysqli);
+  $fb_id = clean($fb_user->getId(), $mysqli);
 	$res = $mysqli->query('SELECT * from table_user where user_fb = ' . $fb_id);
 	$row = $res->fetch_object();
 	if ($row) {
 		$returning_user = true;
 		$best_score = $row->user_score;
 		$best_time = $row->user_time;
-
-        $user_rank = getPosition($best_score, $best_time);
 		// straightaway update the user row
 		$user_obj = $row;
+
+		game_log('User played before, try to update score...');
 		require_once('php/insertUser.php');
+
+		// get position AFTER insertUser, may have beaten previous best score
+		if ( $beat_highscore ) {
+			$user_rank = getPosition($user_score, $user_time);
+		} else {
+			$user_rank = getPosition($best_score, $best_time);
+		}
+		game_log('Rank: ' . $user_rank);
+	} else {
+		game_log('User played for the first time');
 	}
+} else {
+	game_log('User is not logged in');
 }
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,7 @@
 <?php
 require_once 'php/init.php';
+
+game_log('User entered index page');
 ?>
 <!doctype html>
 <html lang="en">

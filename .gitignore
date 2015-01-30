@@ -2,6 +2,7 @@
 .project
 .buildpath
 .settings
+.metadata
 
 # Ignore the configuration file
 # When deploying or checking out, make a copy of php/config.template.php,

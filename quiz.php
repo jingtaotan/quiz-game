@@ -7,7 +7,8 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 $date = date('Y-m-d H:i:s');
 
 if($date > $endDate){
-    header("Location: scoreBoard.php?ended=true");
+  game_log('Contest period over, redirect to scoreboard');
+  header("Location: scoreBoard.php?ended=true");
 }
 
 $mysqli = getConnection();
@@ -52,6 +53,8 @@ for ($difficulty = 1; $difficulty <= 4; $difficulty++) {
 }
 $mysqli -> close();
 shuffle($questions);
+
+game_log('Starting game...');
 ?>
 <!DOCTYPE html>
 <html lang="en">

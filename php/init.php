@@ -277,4 +277,30 @@ if ($fb_session) {
     error_log($e);
   }
 }
+
+/* Adds a comma-separated log entry into the game_log file
+  Includes date time and Facebook user ID */
+function game_log($msg) {
+  global $fb_user;
+
+  $t = microtime(true);
+  $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+  $time = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+
+  $user_fbid = '';
+  if ( isset($fb_user) && $fb_user ) {
+    $user_fbid = $fb_user->getID();
+  }
+
+  $file = str_replace('C:\\wamp\\www\\', '', debug_backtrace()[0]['file']);
+
+  $entry = implode('","', array(
+    $time->format("Y-m-d H:i:s.u"),
+    $user_fbid,
+    $file,
+    str_replace('"', '""', $msg)
+  ));
+  $entry = '"' . $entry . '"';
+  error_log($entry . PHP_EOL, 3, 'C:\\wamp\\logs\\game_log.log');
+}
 ?>
