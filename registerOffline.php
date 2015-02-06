@@ -96,10 +96,10 @@
                                 </div>
                                 <hr />
                                 <div class="form-group">
-                                    <label for="inputResume">Do you have a resume? </label>
+                                    <label for="inputResume">Have you already submited your resume? </label>
                                     <div class="checkbox">
                                         <label>
-                                          <input type="checkbox" name="inputResume" id="inputResume" value="1"> Yes, I have.
+                                          <input type="checkbox" name="inputResume" id="inputResume" value="1"> Yes, I did.
                                         </label>
                                       </div>
                                 </div>
