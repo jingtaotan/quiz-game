@@ -183,7 +183,7 @@ function getNavBar($page) {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li ' . ($page == 'quiz' ? 'class="active"' : '') . '>
-                                <a href="quiz.php">Play Now</a>
+                                <a href="quiz.php?isOffline=true">Play Now</a>
                             </li>
                             <li ' . ($page == 'about' ? 'class="active"' : '') . '>
                                 <a href="about.php">About arvato</a>
