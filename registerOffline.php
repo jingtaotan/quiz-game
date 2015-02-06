@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="icon" href="favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-        <title>Results - arvato World Fact Challenge</title>
+        <title>Offline Registration</title>
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,36 +46,37 @@
                                 <div class="form-group">
                                     <label for="inputName">Name <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputName" id="inputName" placeholder="Enter your name">
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">* Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputEmail">Email address <span class="red" >*</span></label>
                                     <input type="email" class="form-control required" name="inputEmail" id="inputEmail" placeholder="Enter email">
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">* Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPhone">Phone Number <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputPhone" id="inputPhone" placeholder="Enter phone number">
-                                    <span class="childHidden">Please do not leave this empty<br /></span>
-                                    <span class="childHidden phone">Please make sure it is a valid number (example: 01XXXXXXXX) </span>
+                                    <span class="childHidden">* Please do not leave this empty<br /></span>
+                                    <span class="childHidden phone">* Enter 10 or 11 digit phone number with area code, no spaces and hyphens</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputAge">Age <span class="red" >*</span></label>
                                     <input type="text" class="form-control required" name="inputAge" id="inputAge" placeholder="Enter you age">
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">* Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputRemark">Remark (graduation period/ notice period) <span class="red" >*</span></label>
                                     <textarea class="form-control required"  name="inputRemark" id="inputRemark" placeholder="Enter your area of interest" rows="3"></textarea>
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">* Please do not leave this empty</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputInterest">Area Of Interest <span class="red" >*</span></label>
                                     <textarea class="form-control required"  name="inputInterest" id="inputInterest" placeholder="Enter your area of interest" rows="3"></textarea>
-                                    <span class="childHidden">Please do not leave this empty</span>
+                                    <span class="childHidden">* Please do not leave this empty</span>
                                 </div>
+                                <hr />
                                 <div class="form-group">
-                                    <label for="inputStatus">Status </label>
+                                    <label for="inputStatus">Status: </label>
                                     <div class="radio">
                                       <label>
                                         <input type="radio" name="inputStatus" id="inputStatus" value="Fresh Graduate" checked>
@@ -88,6 +89,15 @@
                                         Professional
                                       </label>
                                     </div>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <label for="inputResume">Do you have a resume? </label>
+                                    <div class="checkbox">
+                                        <label>
+                                          <input type="checkbox" name="inputResume" id="inputResume" value="1"> Yes, I have.
+                                        </label>
+                                      </div>
                                 </div>
                                 <input type="hidden" name="token" value="<?php $token =bin2hex(mcrypt_create_iv(128, MCRYPT_DEV_RANDOM)); ?>" />
                                 <button type="submit" class="btn btn-default">
@@ -105,6 +115,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
             //Validation
+            var inputPhone = $('#inputPhone');
             $("#register-form").submit(function(){
                 var isFormValid = true;
 
@@ -120,8 +131,8 @@
                         $(this).next('.childHidden').hide();
                     }
                 });
-
-                if($.trim($('#inputPhone').val()).length != 10){
+                var trimmedLength = $.trim(inputPhone.val()).length;
+                  if(trimmedLength != 10 && trimmedLength != 11) {
                     $('#inputPhone').addClass("highlight");
                     $('#inputPhone').next('.childHidden').next('.childHidden').show();
                     isFormValid = false;

@@ -13,9 +13,13 @@ if (isset($_POST["token"])) {
     $remark = clean($_POST["inputRemark"], $mysqli);
     $interest = clean($_POST["inputInterest"], $mysqli);
     $status = clean($_POST["inputStatus"], $mysqli);
+    $resume = clean($_POST["inputResume"], $mysqli);
 
-    $stmt = $mysqli -> prepare("INSERT INTO table_register VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt -> bind_param('sississs', $name, $id, $phone, $email, $age, $status, $interest, $remark);
+    if($resume==null){
+        $resume='0';
+    }
+    $stmt = $mysqli -> prepare("INSERT INTO table_register VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt -> bind_param('sississss', $name, $id, $phone, $email, $age, $status, $interest, $remark, $resume);
 
     if ($stmt -> execute()) {
         $stmt -> close();
