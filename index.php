@@ -26,10 +26,20 @@ game_log('User entered index page');
 		<![endif]-->
 	</head>
 	<body>
-		<div id="fb-root"></div>
 		<?php getNavBar("index"); ?>
 		<div class="container">
 			<section class="row">
+			    <?php
+                    if (isset($_GET["played"])) {
+                        echo '<div class="alert alert-success alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <strong>Message:</strong> Thank you for participating in our quiz!<br />
+                                <a href="quiz.php">Click here to play again</a>
+                            </div>';
+                    }
+                ?>
 				<div class="col-sm-6">
 					<h1 class="xl">Play now<br/>and win!</h1>
 					<h2>arvato World Fact Challenge</h2>
@@ -38,9 +48,8 @@ game_log('User entered index page');
 						<b>AEON shopping vouchers</b> worth up to <b>RM250!</b>
 					</p>
 					<p>
-						<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php">Play Now</a>
+						<a class="btn btn-lg btn-block btn-primary" id="play-now-btn" href="quiz.php?isOffline=true">Play Now</a>
 					</p>
-					<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 				</div>
 				<div class="col-sm-6">
 					<img src="img/vouchers.jpg" alt="Vouchers" style="width: 100%;" />
@@ -50,7 +59,7 @@ game_log('User entered index page');
 				<div class="col-sm-8">
 					<h2>How it works</h2>
 					<ol>
-						<li>Click the <a href="quiz.php">Play Now</a> button.</li>
+						<li>Click the <a href="quiz.php?isOffline=true">Play Now</a> button.</li>
 						<li>Answer as many questions as you can correctly in 60 seconds.</li>
 						<li>Click Login to enter the competition with your Facebook account.</li>
 						<li>Play as many times as you like to improve your and win prizes!</li>

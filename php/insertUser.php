@@ -25,7 +25,8 @@ if (isset($user_obj) || isset($_POST["token"])) {
     $user_phone = clean($_POST["inputPhone"], $mysqli);
     $user_fb = clean($_POST["inputFbuserid"], $mysqli);
     $token = clean($_POST["token"], $mysqli);
-    $user_contact = clean($_POST['inputContact'], $mysqli);
+    $isOffline = clean($_POST['isOffline'], $mysqli);
+    $user_contact = "1";
   }
 
 
@@ -89,8 +90,8 @@ if (isset($user_obj) || isset($_POST["token"])) {
       // Insert
       game_log('Inserting new user...');
 
-      $stmt = $mysqli -> prepare("INSERT INTO table_user VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-      $stmt -> bind_param('isssssdi', $id, $user_name, $user_email, $user_phone, $user_fb, $user_score, $user_time, $user_contact);
+      $stmt = $mysqli -> prepare("INSERT INTO table_user VALUES (?, ?, ?, ?, ?, ?, ?)");
+      $stmt -> bind_param('isssssd', $id, $user_name, $user_email, $user_phone, $user_fb, $user_score, $user_time);
 
       $stmt -> execute();
 
@@ -122,6 +123,8 @@ if (isset($user_obj) || isset($_POST["token"])) {
     if (!isset($user_obj)) {
       if ( isset($require_from_root) && $require_from_root ) {
         header("Location: scoreBoard.php?played=true");
+      } elseif($isOffline=="true"){
+        header("Location: ../index.php?played=true");
       } else {
         header("Location: ../scoreBoard.php?played=true");
       }

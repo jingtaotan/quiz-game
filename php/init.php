@@ -188,9 +188,6 @@ function getNavBar($page) {
                             <li ' . ($page == 'about' ? 'class="active"' : '') . '>
                                 <a href="about.php">About arvato</a>
                             </li>
-                            <li ' . ($page == 'scoreBoard' ? 'class="active"' : '') . '>
-                                <a href="scoreBoard.php">Scoreboard</a>
-                            </li>
                             <li ' . ($page == 'OfflineRegister' ? 'class="active"' : '') . '>
                                 <a href="registerOffline.php">Offline Registration</a>
                             </li>
@@ -304,6 +301,6 @@ function game_log($msg) {
     str_replace('"', '""', $msg)
   ));
   $entry = '"' . $entry . '"';
-  error_log($entry . PHP_EOL, 3, 'C:\\wamp\\logs\\game_log.log');
+  //error_log($entry . PHP_EOL, 3, 'C:\\wamp\\logs\\game_log.log');
 }
 ?>

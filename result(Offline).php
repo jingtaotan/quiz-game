@@ -85,6 +85,7 @@ $returning_user = false;
 								</button>
 								<input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>"/>
 								<input type="hidden" name="inputFbuserid" value="<?php echo $fb_id; ?>"/>
+								<input type="hidden" name="isOffline" value="true"/>
 							</form>
 						</div>
 				</div>
