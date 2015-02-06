@@ -191,6 +191,9 @@ function getNavBar($page) {
                             <li ' . ($page == 'scoreBoard' ? 'class="active"' : '') . '>
                                 <a href="scoreBoard.php">Scoreboard</a>
                             </li>
+                            <li ' . ($page == 'OfflineRegister' ? 'class="active"' : '') . '>
+                                <a href="registerOffline.php">Offline Registration</a>
+                            </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

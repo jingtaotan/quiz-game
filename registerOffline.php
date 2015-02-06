@@ -20,6 +20,10 @@
         <![endif]-->
     </head>
     <body>
+        <?php
+            require_once 'php/init.php';
+            getNavBar("OfflineRegister");
+        ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
