@@ -36,7 +36,6 @@ game_log('User entered index page');
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <strong>Message:</strong> Thank you for participating in our quiz!<br />
-                                <a href="quiz.php">Click here to play again</a>
                             </div>';
                     }
                 ?>
